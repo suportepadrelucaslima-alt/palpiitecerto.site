@@ -1,0 +1,643 @@
+<!DOCTYPE html><html lang="pt"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Poder dos 4 Arcanjos — Programa Completo</title>
+  <link rel="stylesheet" href="../inicio-oracoes-principal/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../inicio-oracoes-principal/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body,html{margin:0;padding:0;font-family:'Lato',sans-serif;background:linear-gradient(160deg,#0d1f50 0%,#0a1640 50%,#0e1e4a 100%);background-attachment:fixed;color:white;min-height:100vh;font-size:17px}
+    .title-font{font-family:'Cinzel',serif}.golden-text{color:#d4af37}
+    .overlay-pattern{background-image:url('https://www.transparenttextures.com/patterns/crosses.png');opacity:.06;position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
+    .site-header{padding:12px 0;background:rgba(8,18,55,.97);border-bottom:2px solid rgba(212,175,55,.45);position:sticky;top:0;z-index:100}
+    .back-link{color:#d4af37;text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-weight:bold;font-size:17px}.back-link:hover{color:#fff}
+    .section-divider{display:flex;align-items:center;margin:24px 0}
+    .divider-line{flex-grow:1;height:2px;background:linear-gradient(to right,transparent,rgba(212,175,55,.65),transparent)}
+    .divider-icon{font-size:22px;color:#d4af37;margin:0 16px}
+
+    /* TABS */
+    .nav-tabs-custom{border:none;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:28px}
+    .nav-tabs-custom .nav-link{border:1px solid rgba(212,175,55,.35);border-radius:30px;color:rgba(255,255,255,.65);background:rgba(8,18,50,.70);padding:8px 18px;font-family:'Cinzel',serif;font-size:.80rem;font-weight:600;transition:all .3s;letter-spacing:.5px}
+    .nav-tabs-custom .nav-link:hover{border-color:rgba(212,175,55,.70);color:#d4af37}
+    .nav-tabs-custom .nav-link.active{background:linear-gradient(135deg,#b8870b,#f7de6a);color:#06103a;border-color:transparent;box-shadow:0 4px 14px rgba(212,175,55,.40)}
+
+    /* NOVENA */
+    .novena-day{background:rgba(8,18,50,.88);border:1px solid rgba(212,175,55,.25);border-radius:14px;margin-bottom:16px;overflow:hidden;cursor:pointer}
+    .novena-day-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;gap:12px}
+    .novena-day-header:hover .novena-day-title{color:#fff}
+    .novena-badge{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#b8870b,#f7de6a);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:.82rem;color:#06103a;flex-shrink:0;font-family:'Cinzel',serif}
+    .novena-day-title{font-family:'Cinzel',serif;color:#d4af37;font-size:.95rem;font-weight:600;flex:1}
+    .novena-day-sub{font-size:.78rem;color:rgba(255,255,255,.45)}
+    .novena-body{padding:0 20px 20px;display:none}
+    .novena-body.open{display:block}
+    .prayer-text{font-family:'Lato',sans-serif;font-style:normal;line-height:1.85;font-size:1.08rem;color:rgba(255,255,255,.92)}
+    .prayer-text p{margin-bottom:12px}.prayer-text p:last-child{margin-bottom:0}
+    .meditation-box{background:rgba(212,175,55,.08);border-left:3px solid rgba(212,175,55,.50);border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:16px;font-size:.95rem;color:rgba(255,255,255,.75);font-style:normal}
+    .novena-day-arcanjo{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;padding:3px 10px;border-radius:12px;margin-bottom:12px;font-weight:bold}
+    .arc-miguel{background:rgba(255,107,53,.15);color:#ff9b65;border:1px solid rgba(255,107,53,.30)}
+    .arc-rafael{background:rgba(53,199,133,.15);color:#5fd9a3;border:1px solid rgba(53,199,133,.30)}
+    .arc-gabriel{background:rgba(91,159,255,.15);color:#8bbfff;border:1px solid rgba(91,159,255,.30)}
+    .arc-uriel{background:rgba(212,175,55,.15);color:#d4af37;border:1px solid rgba(212,175,55,.30)}
+    .arc-todos{background:rgba(180,100,255,.15);color:#d09fff;border:1px solid rgba(180,100,255,.30)}
+
+    /* ÁUDIOS */
+    .audio-arcanjo{background:rgba(8,18,50,.88);border-radius:18px;padding:24px 20px;margin-bottom:24px}
+    .audio-arcanjo-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .audio-icon{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+    .ai-miguel{background:rgba(255,107,53,.15);border:2px solid rgba(255,107,53,.45);color:#ff9b65}
+    .ai-rafael{background:rgba(53,199,133,.15);border:2px solid rgba(53,199,133,.45);color:#5fd9a3}
+    .ai-gabriel{background:rgba(91,159,255,.15);border:2px solid rgba(91,159,255,.45);color:#8bbfff}
+    .ai-uriel{background:rgba(212,175,55,.15);border:2px solid rgba(212,175,55,.45);color:#d4af37}
+    .ai-todos{background:rgba(180,100,255,.15);border:2px solid rgba(180,100,255,.45);color:#d09fff}
+    .audio-name{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;margin:0 0 3px}
+    .audio-role{font-size:.82rem;opacity:.55;margin:0}
+    .video-wrapper{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-bottom:12px}
+    .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+    .video-label{font-size:.82rem;color:rgba(255,255,255,.50);text-align:center}
+
+    /* RITUAIS */
+    .ritual-card{background:rgba(8,18,50,.88);border-radius:16px;padding:22px;margin-bottom:20px}
+    .ritual-card-title{font-family:'Cinzel',serif;color:#d4af37;font-size:1rem;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+    .ritual-steps{padding-left:0;list-style:none;margin:0;counter-reset:step}
+    .ritual-steps li{padding:8px 0 8px 30px;position:relative;font-size:.92rem;color:rgba(255,255,255,.80);border-bottom:1px solid rgba(255,255,255,.06)}
+    .ritual-steps li:last-child{border-bottom:none}
+    .ritual-steps li::before{content:counter(step);counter-increment:step;position:absolute;left:0;top:10px;width:20px;height:20px;background:rgba(212,175,55,.20);border-radius:50%;font-size:.70rem;font-weight:bold;color:#d4af37;text-align:center;line-height:20px}
+    .download-btn{background:linear-gradient(135deg,#b8870b,#f7de6a,#b8870b);background-size:200% auto;color:#06103a;border:none;font-weight:bold;padding:12px 28px;border-radius:30px;font-size:.95rem;font-family:'Cinzel',serif;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:all .3s;animation:pulse 3s infinite}
+    @keyframes pulse{0%,100%{box-shadow:0 4px 16px rgba(212,175,55,.5)}50%{box-shadow:0 6px 28px rgba(212,175,55,.8)}}
+    .download-btn:hover{background-position:right center}
+
+    /* CURSO */
+    .licao-card{background:rgba(8,18,50,.88);border:1px solid rgba(212,175,55,.20);border-radius:14px;margin-bottom:16px;overflow:hidden;cursor:pointer}
+    .licao-header{display:flex;align-items:center;gap:14px;padding:16px 20px}
+    .licao-number{width:38px;height:38px;border-radius:50%;background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.50);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:.82rem;color:#d4af37;flex-shrink:0;font-family:'Cinzel',serif}
+    .licao-title{font-family:'Cinzel',serif;color:#d4af37;font-size:.95rem;font-weight:600;flex:1}
+    .licao-dur{font-size:.78rem;color:rgba(255,255,255,.40);white-space:nowrap}
+    .licao-body{padding:0 20px 20px;display:none}
+    .licao-body.open{display:block}
+    .licao-text{font-size:.93rem;color:rgba(255,255,255,.80);line-height:1.75}
+    .licao-text p{margin-bottom:12px}.licao-text p:last-child{margin-bottom:0}
+    .licao-text strong{color:#d4af37}
+    .licao-destaque{background:rgba(212,175,55,.08);border-left:3px solid rgba(212,175,55,.50);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-style:normal;font-size:.95rem;color:rgba(255,255,255,.75)}
+
+    /* WALL */
+    .premium-wall{background:rgba(8,18,50,.95);border:2px solid rgba(212,175,55,.55);border-radius:18px;padding:36px 24px;text-align:center;max-width:500px;margin:60px auto}
+    .wall-icon{font-size:52px;color:#d4af37;margin-bottom:16px;opacity:.80}
+    .wall-title{font-family:'Cinzel',serif;color:#d4af37;font-size:1.3rem;margin-bottom:10px}
+    .wall-text{color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.65;margin-bottom:24px}
+    .btn-comprar{background:linear-gradient(135deg,#b8870b,#f7de6a,#b8870b);background-size:200% auto;color:#06103a;border:none;font-weight:bold;padding:14px 28px;border-radius:30px;font-size:1rem;font-family:'Cinzel',serif;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;animation:pulse 3s infinite}
+    .btn-comprar:hover{background-position:right center;color:#06103a}
+    .btn-ja-comprei{border:1px solid rgba(212,175,55,.45);color:rgba(212,175,55,.80);background:none;padding:10px 22px;border-radius:25px;font-size:.88rem;text-decoration:none;display:inline-block;margin-top:12px;transition:all .3s}
+    .btn-ja-comprei:hover{background:rgba(212,175,55,.12);color:#d4af37}
+    .wall-features{list-style:none;padding:0;margin:0 0 24px;text-align:left;max-width:280px;margin-left:auto;margin-right:auto}
+    .wall-features li{padding:5px 0;font-size:.88rem;color:rgba(255,255,255,.65);display:flex;align-items:center;gap:8px}
+    .wall-features li i{color:#d4af37}
+    .site-footer{background:rgba(8,18,55,.97);border-top:2px solid rgba(212,175,55,.45);padding:20px 0;margin-top:48px;text-align:center;font-size:14px;color:rgba(255,255,255,.45)}
+    @media(max-width:575px){.novena-day-header{padding:14px 14px}.novena-body{padding:0 14px 16px}.audio-arcanjo{padding:18px 14px}.ritual-card{padding:16px 14px}}
+  </style>
+</head>
+<body>
+<div class="overlay-pattern"></div>
+<header class="site-header">
+  <div class="container"><a href="../produto-premium/" class="back-link"><i class="fas fa-arrow-left"></i> Biblioteca Sagrada</a></div>
+</header>
+
+<!-- WALL (não comprou) -->
+<div id="premium-wall">
+  <div class="premium-wall">
+    <div class="wall-icon"><i class="fas fa-shield-halved"></i></div>
+    <h2 class="wall-title">Poder dos 4 Arcanjos</h2>
+    <p class="wall-text">Programa completo e exclusivo para membros — novena, áudios, rituais sagrados e curso devocional em 7 lições.</p>
+    <ul class="wall-features">
+      <li><i class="fas fa-check-circle"></i> Novena de 9 dias dos Arcanjos</li>
+      <li><i class="fas fa-check-circle"></i> Áudios de invocação de cada arcanjo</li>
+      <li><i class="fas fa-check-circle"></i> Rituais completos + PDF</li>
+      <li><i class="fas fa-check-circle"></i> Curso devocional em 7 lições</li>
+    </ul>
+    <a href="https://pay.kiwify.com.br/MEf0uij" class="btn-comprar"><i class="fas fa-lock-open"></i> Quero Ter Acesso</a><br>
+    <a href="../login/" class="btn-ja-comprei">Já comprei — Entrar</a>
+  </div>
+</div>
+
+<!-- CONTEÚDO (comprou) -->
+<div id="conteudo-premium" style="display:none">
+<main class="py-4">
+<div class="container" style="max-width:820px">
+
+  <div class="text-center mb-3">
+    <p style="color:rgba(212,175,55,.65);letter-spacing:4px;font-size:.72rem;font-family:'Cinzel',serif;">— ✦ PROGRAMA COMPLETO ✦ —</p>
+    <h1 class="title-font golden-text" style="font-size:1.9rem">Poder dos 4 Arcanjos</h1>
+    <p style="color:rgba(255,255,255,.55);font-family:'IM Fell English',serif;font-style:italic;font-size:.95rem">Bem-vindo, <span id="email-logado"></span></p>
+  </div>
+
+  <!-- TABS -->
+  <ul class="nav nav-tabs-custom" id="mainTabs">
+    <li class="nav-item"><a class="nav-link active" href="#novena" onclick="showTab('novena',this);return false"><i class="fas fa-pray me-1"></i> Novena 9 Dias</a></li>
+    <li class="nav-item"><a class="nav-link" href="#audios" onclick="showTab('audios',this);return false"><i class="fas fa-headphones me-1"></i> Áudios de Invocação</a></li>
+    <li class="nav-item"><a class="nav-link" href="#rituais" onclick="showTab('rituais',this);return false"><i class="fas fa-fire-flame-curved me-1"></i> Rituais + PDF</a></li>
+    <li class="nav-item"><a class="nav-link" href="#curso" onclick="showTab('curso',this);return false"><i class="fas fa-book-open me-1"></i> Curso 7 Lições</a></li>
+  </ul>
+
+  <!-- ═══════════ ABA: NOVENA ═══════════ -->
+  <div id="tab-novena">
+    <p style="text-align:center;color:rgba(255,255,255,.50);font-size:.88rem;margin-bottom:20px">Clique em cada dia para abrir a meditação e a oração do dia.</p>
+
+    <!-- DIA 1 -->
+    <div class="novena-day" onclick="toggleNovena(this)">
+      <div class="novena-day-header">
+        <span class="novena-badge">1</span>
+        <div style="flex:1"><div class="novena-day-title">O Chamado Celestial</div><div class="novena-day-sub">Introdução à devoção dos Arcanjos</div></div>
+        <i class="fas fa-chevron-down" style="color:#d4af37;transition:transform .3s"></i>
+      </div>
+      <div class="novena-body">
+        <span class="novena-day-arcanjo arc-todos"><i class="fas fa-star"></i> Todos os Arcanjos</span>
+        <div class="meditation-box">"Antes de invocar, disponha o coração. Os arcanjos não vêm a quem os trata como ferramentas — vêm a quem os recebe como mensageiros de Deus."</div>
+        <div class="prayer-text">
+          <p>Ó Deus Todo-Poderoso, que criaste os anjos para guardar Vossas criaturas e executar Vossos planos — eu começo esta novena com humildade e fé. Não venho com palavras bonitas, mas com o coração aberto.</p>
+          <p>Abri-me para a presença dos Vossos santos arcanjos. Que Miguel me proteja, Rafael me cure, Gabriel me ilumine e Uriel me dê sabedoria. Que estes nove dias transformem minha vida espiritual de dentro para fora. Amém.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 2 -->
+    <div class="novena-day" onclick="toggleNovena(this)">
+      <div class="novena-day-header">
+        <span class="novena-badge">2</span>
+        <div style="flex:1"><div class="novena-day-title">O Escudo de São Miguel</div><div class="novena-day-sub">Proteção e batalha espiritual</div></div>
+        <i class="fas fa-chevron-down" style="color:#d4af37;transition:transform .3s"></i>
+      </div>
+      <div class="novena-body">
+        <span class="novena-day-arcanjo arc-miguel"><i class="fas fa-shield-halved"></i> São Miguel Arcanjo</span>
+        <div class="meditation-box">Medite hoje: "Existe algo na minha vida que precisa ser protegido — uma relação, minha fé, minha família? Entrego isso nas mãos de São Miguel."</div>
+        <div class="prayer-text">
+          <p>São Miguel Arcanjo, Príncipe das Milícias Celestiais — olha para a minha vida hoje e diz-me onde o inimigo está tentando entrar. Que tua espada de fogo corte toda ligação, maldição e influência que não seja de Deus.</p>
+          <p>Cobre minha mente com teu elmo de salvação para que nenhum pensamento destrutivo ali permaneça. Cobre meu coração com teu escudo para que nenhuma palavra amarga o perfure. Cobre meu lar com tua presença para que as trevas não encontrem lugar. Amém.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 3 -->
+    <div class="novena-day" onclick="toggleNovena(this)">
+      <div class="novena-day-header">
+        <span class="novena-badge">3</span>
+        <div style="flex:1"><div class="novena-day-title">A Espada do Guerreiro</div><div class="novena-day-sub">Libertação e coragem com São Miguel</div></div>
+        <i class="fas fa-chevron-down" style="color:#d4af37;transition:transform .3s"></i>
+      </div>
+      <div class="novena-body">
+        <span class="novena-day-arcanjo arc-miguel"><i class="fas fa-shield-halved"></i> São Miguel Arcanjo</span>
+        <div class="meditation-box">Medite hoje: "Onde na minha vida eu me rendo ao medo em vez de lutar com fé? São Miguel me dá coragem para enfrentar, não para fugir."</div>
+        <div class="prayer-text">
+          <p>Miguel, guerreiro de Deus — preciso da tua coragem hoje. Não da coragem que não sente medo, mas da coragem que avança mesmo sentindo. Ensinaste ao Céu que ninguém é como Deus — ensina-me também a colocar Deus acima de todos os meus medos.</p>
+          <p>Que eu não recue diante das batalhas que Deus colocou em minha vida. Que eu saiba que não estou sozinho — que há um Príncipe Celestial ao meu lado. Amém.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 4 -->
+    <div class="novena-day" onclick="toggleNovena(this)">
+      <div class="novena-day-header">
+        <span class="novena-badge">4</span>
+        <div style="flex:1"><div class="novena-day-title">O Toque Curador de Rafael</div><div class="novena-day-sub">Cura, saúde e restauração</div></div>
+        <i class="fas fa-chevron-down" style="color:#d4af37;transition:transform .3s"></i>
+      </div>
+      <div class="novena-body">
+        <span class="novena-day-arcanjo arc-rafael"><i class="fas fa-staff-snake"></i> São Rafael Arcanjo</span>
+        <div class="meditation-box">Medite hoje: "Que partes de mim ainda estão feridas e nunca se curaram de verdade? Corpo, alma, emoções — São Rafael cuida de tudo."</div>
+        <div class="prayer-text">
+          <p>São Rafael, médico enviado por Deus — trago a ti hoje todas as minhas feridas, tanto as que os outros veem quanto as que carrego em silêncio. Toca com tuas mãos sagradas cada ponto de dor em mim.</p>
+          <p>Que tua luz verde de cura entre em cada célula enferma, em cada memória traumatizada, em cada relacionamento partido. Restaura em mim o que o tempo não conseguiu curar. Amém.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 5 -->
+    <div class="novena-day" onclick="toggleNovena(this)">
+      <div class="novena-day-header">
+        <span class="novena-badge">5</span>
+        <div style="flex:1"><div class="novena-day-title">A Jornada Curada por Rafael</div><div class="novena-day-sub">Cura de relacionamentos e viagens</div></div>
+        <i class="fas fa-chevron-down" style="color:#d4af37;transition:transform .3s"></i>
+      </div>
+      <div class="novena-body">
+        <span class="novena-day-arcanjo arc-rafael"><i class="fas fa-staff-snake"></i> São Rafael Arcanjo</span>
+        <div class="meditation-box">Medite hoje: "Rafael acompanhou Tobias em uma longa jornada e o trouxe de volta são e salvo — com quem ou onde na minha vida preciso de um companheiro assim?"</div>
+        <div class="prayer-text">
+          <p>Rafael, companheiro de viagem — protege-me em todas as jornadas desta vida. As físicas e as do coração: as buscas, os recomeços, as mudanças, as despedidas. Que tua presença seja como a do companheiro que nunca abandona.</p>
+          <p>Intercede por quem eu amo que está em jornada agora. Traz-nos de volta uns aos outros em paz e em saúde. Amém.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 6 -->
+    <div class="novena-day" onclick="toggleNovena(this)">
+      <div class="novena-day-header">
+        <span class="novena-badge">6</span>
+        <div style="flex:1"><div class="novena-day-title">A Trombeta de Gabriel</div><div class="novena-day-sub">Revelação e discernimento</div></div>
+        <i class="fas fa-chevron-down" style="color:#d4af37;transition:transform .3s"></i>
+      </div>
+      <div class="novena-body">
+        <span class="novena-day-arcanjo arc-gabriel"><i class="fas fa-bell"></i> São Gabriel Arcanjo</span>
+        <div class="meditation-box">Medite hoje: "Deus tem algo a me dizer que ainda não ouvi? Gabriel é o mensageiro — disponha seu coração para ouvir, não apenas para falar."</div>
+        <div class="prayer-text">
+          <p>Gabriel, arauto do Altíssimo — soa tua trombeta em minha vida. Que o som da vontade de Deus ressoe mais forte do que qualquer barulho do mundo. Fala ao meu coração com clareza.</p>
+          <p>Que eu tenha coragem de ouvir mesmo quando a mensagem pede mudança. Que eu tenha fé para dizer como Maria: "Faça-se em mim conforme a tua palavra." Amém.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 7 -->
+    <div class="novena-day" onclick="toggleNovena(this)">
+      <div class="novena-day-header">
+        <span class="novena-badge">7</span>
+        <div style="flex:1"><div class="novena-day-title">O Fogo Purificador de Uriel</div><div class="novena-day-sub">Sabedoria, clareza e purificação</div></div>
+        <i class="fas fa-chevron-down" style="color:#d4af37;transition:transform .3s"></i>
+      </div>
+      <div class="novena-body">
+        <span class="novena-day-arcanjo arc-uriel"><i class="fas fa-fire-flame-curved"></i> Uriel Arcanjo</span>
+        <div class="meditation-box">Medite hoje: "O que em mim precisa ser purificado pelo fogo? Orgulho, amargura, confusão? Entregue isso conscientemente ao fogo sagrado de Uriel."</div>
+        <div class="prayer-text">
+          <p>Uriel, Luz de Deus — acende em mim o fogo sagrado da sabedoria. Queima tudo que é de mim e não de Deus: o orgulho que me cega, a confusão que me paralisa, a amargura que me aprisiona.</p>
+          <p>Ilumina minha mente para as decisões importantes desta vida. Que eu não aja por impulso, mas por sabedoria; não por medo, mas por fé; não por hábito, mas por discernimento. Amém.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 8 -->
+    <div class="novena-day" onclick="toggleNovena(this)">
+      <div class="novena-day-header">
+        <span class="novena-badge">8</span>
+        <div style="flex:1"><div class="novena-day-title">A Luz que Guia</div><div class="novena-day-sub">Propósito e direção com Uriel</div></div>
+        <i class="fas fa-chevron-down" style="color:#d4af37;transition:transform .3s"></i>
+      </div>
+      <div class="novena-body">
+        <span class="novena-day-arcanjo arc-uriel"><i class="fas fa-fire-flame-curved"></i> Uriel Arcanjo</span>
+        <div class="meditation-box">Medite hoje: "Onde estou perdido na escuridão da dúvida ou da ignorância? Uriel traz a luz do conhecimento sagrado — peça para ver o caminho."</div>
+        <div class="prayer-text">
+          <p>Uriel, guardião do conhecimento sagrado — dá-me sabedoria para entender o que Deus está fazendo em minha vida. Especialmente nas situações que não fazem sentido, nos sofrimentos que não consigo explicar, nas portas fechadas que não entendo.</p>
+          <p>Que tua luz ilumine o que está escuro na minha compreensão e me dê a paz de quem sabe que Deus tem um plano. Amém.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 9 -->
+    <div class="novena-day" onclick="toggleNovena(this)">
+      <div class="novena-day-header">
+        <span class="novena-badge">9</span>
+        <div style="flex:1"><div class="novena-day-title">A Consagração Final</div><div class="novena-day-sub">União dos 4 Arcanjos — Entrega Total</div></div>
+        <i class="fas fa-chevron-down" style="color:#d4af37;transition:transform .3s"></i>
+      </div>
+      <div class="novena-body">
+        <span class="novena-day-arcanjo arc-todos"><i class="fas fa-star"></i> Os Quatro Arcanjos Unidos</span>
+        <div class="meditation-box">Medite hoje: "Estes nove dias foram uma jornada. O que mudou em você? O que você quer que continue mudando? Consagre-se agora à proteção permanente dos arcanjos."</div>
+        <div class="prayer-text">
+          <p>Ó Deus de toda a criação — neste último dia desta novena, eu me apresento diante de Vós transformado. Não fui perfeito nestes dias, mas fui sincero. E Vós honrais a sinceridade.</p>
+          <p>Pela intercessão dos Vossos santos arcanjos — Miguel, Rafael, Gabriel e Uriel — consagro minha vida, minha família e tudo o que tenho à Vossa proteção e vontade. Que eles me cerquem permanentemente: Miguel à frente com seu escudo, Rafael atrás com sua cura, Gabriel à direita com sua revelação e Uriel à esquerda com sua sabedoria.</p>
+          <p>Que esta novena não termine aqui — que seja o começo de uma devoção que dure toda a vida. Amém. Assim seja.</p>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-novena -->
+
+  <!-- ═══════════ ABA: ÁUDIOS ═══════════ -->
+  <div id="tab-audios" style="display:none">
+    <p style="text-align:center;color:rgba(255,255,255,.50);font-size:.88rem;margin-bottom:20px">Orações e músicas de invocação para cada arcanjo. Use fones para melhor experiência.</p>
+
+    <!-- São Miguel -->
+    <div class="audio-arcanjo">
+      <div class="audio-arcanjo-header">
+        <div class="audio-icon ai-miguel"><i class="fas fa-shield-halved"></i></div>
+        <div><p class="audio-name" style="color:#ff9b65">São Miguel Arcanjo</p><p class="audio-role">Proteção · Batalha Espiritual · Força</p></div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/WlyD11B8V1s" title="São Miguel Arcanjo — Guerreiro da Luz" loading="lazy" allowfullscreen></iframe></div>
+          <p class="video-label">São Miguel — Guerreiro da Luz (5min)</p>
+        </div>
+        <div class="col-md-6">
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/J2T5ZnD38H8" title="Padre Reginaldo Manzotti — Arcanjos" loading="lazy" allowfullscreen></iframe></div>
+          <p class="video-label">Padre Reginaldo Manzotti — Arcanjos (4min)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- São Rafael -->
+    <div class="audio-arcanjo">
+      <div class="audio-arcanjo-header">
+        <div class="audio-icon ai-rafael"><i class="fas fa-staff-snake"></i></div>
+        <div><p class="audio-name" style="color:#5fd9a3">São Rafael Arcanjo</p><p class="audio-role">Cura · Saúde · Proteção nas Viagens</p></div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/bDXeRe8AqpI" title="Eles Vão Te Proteger — Arcanjos" loading="lazy" allowfullscreen></iframe></div>
+          <p class="video-label">Eles Vão Te Proteger — Rafael e Arcanjos (6min)</p>
+        </div>
+        <div class="col-md-6">
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/xaHfJ6Fdx5U" title="Oração aos Arcanjos — Padre Reginaldo" loading="lazy" allowfullscreen></iframe></div>
+          <p class="video-label">Oração aos Arcanjos — Padre Reginaldo (4min)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- São Gabriel -->
+    <div class="audio-arcanjo">
+      <div class="audio-arcanjo-header">
+        <div class="audio-icon ai-gabriel"><i class="fas fa-bell"></i></div>
+        <div><p class="audio-name" style="color:#8bbfff">São Gabriel Arcanjo</p><p class="audio-role">Revelação · Mensagem Divina · Discernimento</p></div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/g60EQ1xR7xw" title="Miguel, Rafael e Gabriel — Oração Musical" loading="lazy" allowfullscreen></iframe></div>
+          <p class="video-label">Miguel, Rafael e Gabriel — Oração (26min)</p>
+        </div>
+        <div class="col-md-6">
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/rwyBPyXcq7Q" title="Os Três Arcanjos — Louvor Especial" loading="lazy" allowfullscreen></iframe></div>
+          <p class="video-label">Os Três Arcanjos — Louvor Especial (35min)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Uriel + Todos -->
+    <div class="audio-arcanjo">
+      <div class="audio-arcanjo-header">
+        <div class="audio-icon ai-todos"><i class="fas fa-star"></i></div>
+        <div><p class="audio-name" style="color:#d09fff">Uriel + Todos os Arcanjos</p><p class="audio-role">Sabedoria · Contemplação · Invocação Unificada</p></div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/Xs1WPdwDmHU" title="Música Relaxante para Atrair os Anjos" loading="lazy" allowfullscreen></iframe></div>
+          <p class="video-label">Música para Atrair os Anjos (1h07min)</p>
+        </div>
+        <div class="col-md-6">
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/q_WpbiKTLcg" title="Som dos Anjos para Orar" loading="lazy" allowfullscreen></iframe></div>
+          <p class="video-label">Som dos Anjos para Orar (2h16min)</p>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-audios -->
+
+  <!-- ═══════════ ABA: RITUAIS ═══════════ -->
+  <div id="tab-rituais" style="display:none">
+    <p style="text-align:center;color:rgba(255,255,255,.50);font-size:.88rem;margin-bottom:20px">Rituais devocionais sagrados. Não são magia — são formas de oração estruturada e encontro com Deus.</p>
+
+    <div class="ritual-card">
+      <div class="ritual-card-title"><i class="fas fa-shield-halved" style="color:#ff9b65"></i> Ritual de Proteção com São Miguel</div>
+      <ol class="ritual-steps">
+        <li>Escolha uma terça ou domingo à noite, em um lugar silencioso</li>
+        <li>Acenda uma vela vermelha ou dourada e coloque-a à sua frente</li>
+        <li>De pé, faça o sinal da cruz e declare: <em>"Coloco-me sob a proteção de São Miguel Arcanjo"</em></li>
+        <li>Imagine uma armadura de luz descendo sobre você — elmo, escudo e espada de fogo</li>
+        <li>Recite em voz alta: <em>"São Miguel, Príncipe Celestial — defende-me no combate. Que tua espada corte toda influência do mal em minha vida, em minha família e neste lar. Quis ut Deus!"</em></li>
+        <li>Permaneça em silêncio por 3 minutos, sentindo a proteção ao redor de você</li>
+        <li>Reze um Pai-Nosso e desligue a vela com os dedos (nunca assopre — soprar dispersa a oração)</li>
+        <li>Repita por 7 dias consecutivos para o ritual completo de proteção</li>
+      </ol>
+    </div>
+
+    <div class="ritual-card">
+      <div class="ritual-card-title"><i class="fas fa-staff-snake" style="color:#5fd9a3"></i> Ritual de Cura com São Rafael</div>
+      <ol class="ritual-steps">
+        <li>Escolha uma quarta-feira de manhã, preferencialmente ao amanhecer</li>
+        <li>Acenda uma vela verde e coloque um copo de água ao lado</li>
+        <li>Coloque as mãos sobre a área do corpo que precisa de cura (ou sobre o coração)</li>
+        <li>Declare: <em>"Rafael, Médico de Deus, em nome de Jesus Cristo, ora por minha cura"</em></li>
+        <li>Permaneça assim por 5 minutos, respirando lentamente e imaginando uma luz verde curando</li>
+        <li>Recite: <em>"São Rafael, que curastes os olhos de Tobit — cura agora o que em mim está enfermo. Corpo, mente, coração e espírito. Amém."</em></li>
+        <li>Beba a água como sinal de recepção da graça curadora</li>
+        <li>Anote em um diário espiritual o que sentiu durante o ritual</li>
+      </ol>
+    </div>
+
+    <div class="ritual-card">
+      <div class="ritual-card-title"><i class="fas fa-bell" style="color:#8bbfff"></i> Ritual de Discernimento com São Gabriel</div>
+      <ol class="ritual-steps">
+        <li>Escolha uma segunda-feira à noite, antes de dormir</li>
+        <li>Acenda uma vela branca ou azul</li>
+        <li>Escreva em um papel a pergunta ou decisão que precisas discernir</li>
+        <li>Ore: <em>"Gabriel, mensageiro de Deus — traz ao meu coração esta noite a resposta que Deus quer me dar"</em></li>
+        <li>Deixe o papel embaixo do travesseiro e durma pedindo sonhos com orientação</li>
+        <li>Ao acordar, sem pegar o celular, fique 5 minutos quieto anotando qualquer impressão, pensamento ou sensação</li>
+        <li>Releia a pergunta do papel e veja se alguma coisa ficou mais clara</li>
+        <li>Confie no processo — às vezes a resposta vem em dias, não imediatamente</li>
+      </ol>
+    </div>
+
+    <div class="ritual-card">
+      <div class="ritual-card-title"><i class="fas fa-fire-flame-curved" style="color:#d4af37"></i> Ritual de Sabedoria com Uriel</div>
+      <ol class="ritual-steps">
+        <li>Escolha uma quinta-feira ao meio-dia — a hora da luz máxima</li>
+        <li>Acenda uma vela dourada ou amarela em local bem iluminado</li>
+        <li>Escreva em um papel tudo que está te confundindo ou te tirando a paz mental</li>
+        <li>Declare: <em>"Uriel, Luz de Deus — queima em mim tudo que é escuridão. Que teu fogo sagrado me purifique e me ilumine"</em></li>
+        <li>Queime o papel na chama da vela, deixando-o cair em um prato à prova de fogo</li>
+        <li>Enquanto o papel queima, ore: <em>"Que a confusão vá embora. Que a sabedoria de Deus venha. Que eu saiba discernir o bem do mal, o verdadeiro do falso. Amém."</em></li>
+        <li>Permaneça contemplando a chama por mais alguns minutos em silêncio total</li>
+        <li>Tome uma decisão importante neste dia, enquanto a clareza ainda está viva em você</li>
+      </ol>
+    </div>
+
+    <div class="ritual-card">
+      <div class="ritual-card-title"><i class="fas fa-star" style="color:#d09fff"></i> Ritual do Círculo dos 4 Arcanjos — Proteção Máxima</div>
+      <ol class="ritual-steps">
+        <li>Faça este ritual aos domingos, após a missa ou oração matinal</li>
+        <li>Fique de pé no centro do seu quarto ou sala, de frente para o leste (use a bússola do celular)</li>
+        <li>Vire para o leste (frente) e declare: <em>"São Miguel, guarda minha frente. Que tua espada afaste todo mal que vem ao meu encontro"</em></li>
+        <li>Vire para o oeste (costas) e declare: <em>"São Rafael, guarda minhas costas. Cura o que ficou para trás. Protege o que está atrás de mim"</em></li>
+        <li>Vire para o norte (direita) e declare: <em>"São Gabriel, guarda minha direita. Fala ao meu coração. Revela-me os caminhos de Deus"</em></li>
+        <li>Vire para o sul (esquerda) e declare: <em>"Uriel, guarda minha esquerda. Ilumina meu caminho com sabedoria divina"</em></li>
+        <li>Volte para o centro, olhe para cima e declare: <em>"Ó Deus Todo-Poderoso — estou cercado pelos Vossos arcanjos. Nada me pode alcançar sem passar por eles. Amém"</em></li>
+        <li>Faça o sinal da cruz e vá ao seu dia em paz</li>
+      </ol>
+    </div>
+
+  </div><!-- /tab-rituais -->
+
+  <!-- ═══════════ ABA: CURSO ═══════════ -->
+  <div id="tab-curso" style="display:none">
+    <p style="text-align:center;color:rgba(255,255,255,.50);font-size:.88rem;margin-bottom:20px">Sete lições para aprofundar sua devoção e entender o papel dos arcanjos na sua vida espiritual.</p>
+
+    <!-- LIÇÃO 1 -->
+    <div class="licao-card" onclick="toggleLicao(this)">
+      <div class="licao-header">
+        <span class="licao-number">1</span>
+        <div class="licao-title">Quem São os Anjos e Arcanjos?</div>
+        <span class="licao-dur">Lição 1 de 7</span>
+        <i class="fas fa-chevron-down" style="color:#d4af37;margin-left:10px;transition:transform .3s"></i>
+      </div>
+      <div class="licao-body">
+        <div class="licao-text">
+          <p><strong>O que a Igreja ensina sobre os anjos</strong></p>
+          <p>Segundo o Catecismo da Igreja Católica (CIC 328-336), os anjos são seres espirituais, criaturas pessoais de Deus, dotados de inteligência e vontade. Não são divindades independentes — são servos e mensageiros de Deus, criados antes do mundo material.</p>
+          <p>Os arcanjos são anjos de hierarquia elevada, enviados para missões de maior importância. O prefixo "arc" vem do grego "arkhé" = chefe, líder. São os mensageiros-chefes do Trono de Deus.</p>
+          <div class="licao-destaque">"Os anjos têm estado presentes desde a criação e em toda a história da salvação, anunciando esta salvação de longe ou de perto e servindo ao cumprimento do desígnio divino." — CIC 332</div>
+          <p><strong>Por que invocar os arcanjos?</strong></p>
+          <p>Não invocamos os arcanjos como se eles fossem independentes de Deus. Nós pedimos a sua intercessão — como pedimos a intercessão dos santos — porque eles estão diante do Trono de Deus e levam nossas orações a Ele. É o mesmo princípio de pedir a um irmão de fé que ore por você.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIÇÃO 2 -->
+    <div class="licao-card" onclick="toggleLicao(this)">
+      <div class="licao-header">
+        <span class="licao-number">2</span>
+        <div class="licao-title">São Miguel — O Guerreiro que Você Precisa</div>
+        <span class="licao-dur">Lição 2 de 7</span>
+        <i class="fas fa-chevron-down" style="color:#d4af37;margin-left:10px;transition:transform .3s"></i>
+      </div>
+      <div class="licao-body">
+        <div class="licao-text">
+          <p>São Miguel aparece nas Escrituras em três momentos-chave: no livro de Daniel (capítulos 10 e 12) como protetor de Israel; na Epístola de Judas (v.9) disputando com o diabo sobre o corpo de Moisés; e no Apocalipse (12:7-9) liderando o exército celestial contra o dragão.</p>
+          <p><strong>O que São Miguel representa para você hoje:</strong> A batalha espiritual não é metáfora — é real. O ceticismo moderno nos faz ignorar o que as Escrituras ensinam claramente: existe uma guerra espiritual e precisamos de proteção divina. São Miguel é o comandante dessa proteção.</p>
+          <div class="licao-destaque">Você não precisa ter medo da guerra espiritual — você precisa ter o General certo ao seu lado. São Miguel garante que, qualquer que seja o ataque, você não está sozinho.</div>
+          <p><strong>Como aprofundar a devoção a São Miguel:</strong> Reze a oração de São Miguel diariamente, especialmente nos momentos de tentação, conflito ou medo. Ele responde à fé — quanto mais você o invoca com confiança, mais percebe a proteção em sua vida.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIÇÃO 3 -->
+    <div class="licao-card" onclick="toggleLicao(this)">
+      <div class="licao-header">
+        <span class="licao-number">3</span>
+        <div class="licao-title">São Rafael — Cura para o Corpo e a Alma</div>
+        <span class="licao-dur">Lição 3 de 7</span>
+        <i class="fas fa-chevron-down" style="color:#d4af37;margin-left:10px;transition:transform .3s"></i>
+      </div>
+      <div class="licao-body">
+        <div class="licao-text">
+          <p>São Rafael aparece principalmente no livro de Tobias — um texto que revela como os anjos operam de incógnito no mundo, guiando e curando sem que percebamos. Rafael se apresentou como "Azarias" (que significa "Deus ajudou") e acompanhou Tobias por toda a jornada antes de revelar sua identidade no final.</p>
+          <p><strong>O que isso nos ensina:</strong> Rafael não se impõe. Ele aparece nas circunstâncias da vida — no médico certo, no encontro providencial, no medicamento que funciona, na pessoa que aparece na hora certa. Pedir a intercessão de Rafael é abrir os olhos para perceber onde Deus está curando através da vida cotidiana.</p>
+          <div class="licao-destaque">Cura não é sempre milagre espetacular. Às vezes é o sono reparador depois de uma noite de oração, o médico que finalmente encontrou o diagnóstico, ou a conversa que desatou uma ferida emocional de anos.</div>
+          <p><strong>Como invocar Rafael para cura:</strong> Seja específico em seus pedidos. Nomeie o que precisa ser curado — físico ou emocional. Rafael trabalha com a precisão de um médico, não genericamente.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIÇÃO 4 -->
+    <div class="licao-card" onclick="toggleLicao(this)">
+      <div class="licao-header">
+        <span class="licao-number">4</span>
+        <div class="licao-title">São Gabriel — Ouça o que Deus Quer Te Dizer</div>
+        <span class="licao-dur">Lição 4 de 7</span>
+        <i class="fas fa-chevron-down" style="color:#d4af37;margin-left:10px;transition:transform .3s"></i>
+      </div>
+      <div class="licao-body">
+        <div class="licao-text">
+          <p>Gabriel foi enviado quatro vezes nas Escrituras — sempre em momentos de revelação decisiva: para Daniel (Dn 8 e 9), para Zacarias (Lc 1:11-20) e para Maria (Lc 1:26-38). Cada aparição começa com "Não temas" — porque a revelação de Deus é sempre maior que nossa capacidade de receber.</p>
+          <p><strong>O desafio de ouvi-lo:</strong> No mundo atual de notificações, redes sociais e barulho constante, ouvir a voz de Deus exige silêncio — algo raro e custoso. Gabriel não grita. Ele fala ao coração. Para ouvi-lo, você precisa fazer silêncio.</p>
+          <div class="licao-destaque">Maria não ouviu Gabriel em um templo lotado ou durante uma festa. Ela o ouviu na simplicidade do cotidiano — provavelmente em silêncio e oração. Gabriel vem aos que criam espaço para ele.</div>
+          <p><strong>Prática para esta semana:</strong> Reserve 10 minutos por dia sem celular, sem TV, sem música. Apenas silêncio. Apresente a Deus uma pergunta que você precisa responder. Escute. Anote o que vier — mesmo que pareça simples ou óbvio.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIÇÃO 5 -->
+    <div class="licao-card" onclick="toggleLicao(this)">
+      <div class="licao-header">
+        <span class="licao-number">5</span>
+        <div class="licao-title">Uriel — A Sabedoria que Você Ignorou</div>
+        <span class="licao-dur">Lição 5 de 7</span>
+        <i class="fas fa-chevron-down" style="color:#d4af37;margin-left:10px;transition:transform .3s"></i>
+      </div>
+      <div class="licao-body">
+        <div class="licao-text">
+          <p>Uriel é o arcanjo menos conhecido da tradição católica popular, mas profundamente presente nos textos apócrifos e na espiritualidade judaica. No Livro de Enoque, Uriel aparece como guardião do portão do paraíso, como o anjo que iluminou a Enoque sobre os mistérios celestiais e como o guia da humanidade no entendimento das leis divinas.</p>
+          <p><strong>Por que precisamos de Uriel hoje:</strong> Vivemos em uma era de excesso de informação e escassez de sabedoria. Sabemos muito mas entendemos pouco. Uriel representa a capacidade de filtrar o que realmente importa — de discernir entre o que parece bom e o que é verdadeiramente bom.</p>
+          <div class="licao-destaque">Sabedoria não é acumular conhecimento. É saber o que fazer com o que você sabe — e ter a coragem de agir segundo esse conhecimento, mesmo quando é difícil.</div>
+          <p><strong>Onde Uriel age na sua vida:</strong> Em qualquer momento de confusão, dúvida ou decisão difícil. Quando você precisa separar o verdadeiro do falso, o de Deus do que não é — Uriel é o arcanjo a invocar.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIÇÃO 6 -->
+    <div class="licao-card" onclick="toggleLicao(this)">
+      <div class="licao-header">
+        <span class="licao-number">6</span>
+        <div class="licao-title">Como Construir uma Devoção Sólida</div>
+        <span class="licao-dur">Lição 6 de 7</span>
+        <i class="fas fa-chevron-down" style="color:#d4af37;margin-left:10px;transition:transform .3s"></i>
+      </div>
+      <div class="licao-body">
+        <div class="licao-text">
+          <p><strong>O problema das devoções instáveis</strong></p>
+          <p>A maioria das pessoas ora com os arcanjos apenas quando está em crise — quando está doente, com medo, perdida ou desesperada. Isso funciona, mas é como ligar para o médico apenas em emergência. Uma devoção sólida é uma relação contínua, não apenas uma linha de emergência.</p>
+          <p><strong>A estrutura de uma devoção sólida:</strong></p>
+          <p>1. <strong>Consistência</strong> — escolha um arcanjo por semana e ore diariamente a ele por 7 dias. Na semana seguinte, mude. Ao fim de 4 semanas, você terá uma relação com cada um deles.</p>
+          <p>2. <strong>Intenção específica</strong> — não ore "ajuda-me". Ore com especificidade: "Miguel, proteja meu filho na escola hoje" ou "Rafael, cuide da saúde da minha mãe esta semana."</p>
+          <p>3. <strong>Gratidão</strong> — sempre que perceber uma proteção, cura ou revelação em sua vida, agradeça ao arcanjo correspondente. Isso fortalece o laço espiritual.</p>
+          <div class="licao-destaque">Uma oração simples e sincera feita todo dia vale mais do que uma oração elaborada feita uma vez por mês.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIÇÃO 7 -->
+    <div class="licao-card" onclick="toggleLicao(this)">
+      <div class="licao-header">
+        <span class="licao-number">7</span>
+        <div class="licao-title">Vida de Intercessão — Deixe os Arcanjos Orarem por Você</div>
+        <span class="licao-dur">Lição 7 de 7</span>
+        <i class="fas fa-chevron-down" style="color:#d4af37;margin-left:10px;transition:transform .3s"></i>
+      </div>
+      <div class="licao-body">
+        <div class="licao-text">
+          <p><strong>O que é intercessão angélica</strong></p>
+          <p>No Apocalipse (8:3-4), João descreve os anjos diante do altar de Deus, oferecendo as orações dos santos junto com incenso. Isso significa que os anjos não apenas entregam nossas orações — eles as apresentam, as amplificam e intercedem junto com elas perante o Trono de Deus.</p>
+          <p>Isso muda tudo. Quando você pede a intercessão dos arcanjos, sua oração vai acompanhada de uma voz celestial infinitamente mais poderosa do que a sua. É como ter um advogado celestial de classe mundial representando o seu caso.</p>
+          <div class="licao-destaque">"Os anjos e os santos rezam com você e por você, sem nada pedir em troca — porque amam a Deus e amam as almas por amor a Ele." — Santo Afonso de Ligório</div>
+          <p><strong>Como viver esta realidade:</strong></p>
+          <p>Comece cada manhã pedindo especificamente aos quatro arcanjos que intercedidam por você naquele dia. À noite, revise o dia e perceba onde cada um deles esteve ativo. Com o tempo, você vai começar a enxergar os arcanjos não como criaturas do passado bíblico — mas como presença ativa e viva na sua história.</p>
+          <p><strong>Parabéns por completar o Curso Devocional dos 4 Arcanjos.</strong> Que este conhecimento se converta em devoção, e a devoção em transformação real. Que Miguel proteja, Rafael cure, Gabriel revele e Uriel ilumine cada passo da sua jornada. Amém.</p>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-curso -->
+
+</div>
+</main>
+</div>
+
+<footer class="site-footer"><p class="mb-0">© 2025 · Poder dos 4 Arcanjos · Conexão Prosperidade</p></footer>
+
+<script src="../js/auth.js"></script>
+<script>
+protegerPagina('poder-dos-arcanjos');
+
+function showTab(id, el) {
+  ['novena','audios','rituais','curso'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = (t === id) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.nav-tabs-custom .nav-link').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function toggleNovena(el) {
+  const body = el.querySelector('.novena-body');
+  const icon = el.querySelector('.fa-chevron-down');
+  const open = body.classList.contains('open');
+  document.querySelectorAll('.novena-body.open').forEach(b => {
+    b.classList.remove('open');
+    b.style.display = 'none';
+    b.closest('.novena-day').querySelector('.fa-chevron-down').style.transform = '';
+  });
+  if (!open) {
+    body.classList.add('open');
+    body.style.display = 'block';
+    icon.style.transform = 'rotate(180deg)';
+  }
+}
+
+function toggleLicao(el) {
+  const body = el.querySelector('.licao-body');
+  const icon = el.querySelector('.fa-chevron-down');
+  const open = body.classList.contains('open');
+  document.querySelectorAll('.licao-body.open').forEach(b => {
+    b.classList.remove('open');
+    b.style.display = 'none';
+    b.closest('.licao-card').querySelector('.fa-chevron-down').style.transform = '';
+  });
+  if (!open) {
+    body.classList.add('open');
+    body.style.display = 'block';
+    icon.style.transform = 'rotate(180deg)';
+  }
+}
+
+</script>
+</body></html>

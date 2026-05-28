@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html><html lang="pt"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Novena de Nossa Senhora Desatadora de Nós</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(160deg, #0d1f50 0%, #0a1640 50%, #0e1e4a 100%);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+            font-size: 18px;
+        }
+        .title-font { font-family: 'Cinzel', serif; }
+        .golden-text { color: #d4af37; }
+
+        .overlay-pattern {
+            background-image: url('https://www.transparenttextures.com/patterns/crosses.png');
+            opacity: 0.06;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        }
+
+        /* Header */
+        .site-header {
+            padding: 12px 0;
+            background-color: rgba(8, 18, 55, 0.97);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.45);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .navbar-brand { font-size: 17px; font-weight: bold; }
+        .nav-link { font-size: 15px; margin: 0 2px; transition: all 0.3s ease; padding: 8px 10px; }
+        .nav-link:hover { color: #d4af37 !important; }
+
+        .navbar-collapse {
+            background-color: rgba(8, 18, 55, 0.99);
+            padding: 16px;
+            border-radius: 0 0 14px 14px;
+            margin-top: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+        }
+        @media (min-width: 992px) { .navbar-collapse { background: transparent; border: none; padding: 0; margin: 0; } }
+
+        /* Hero */
+        .hero-image-container {
+            width: 260px; height: 260px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #d4af37;
+            box-shadow: 0 0 40px rgba(212,175,55,0.45), 0 0 80px rgba(212,175,55,0.15);
+            margin: 0 auto 30px;
+            animation: glow-saint 4s ease-in-out infinite;
+        }
+        @keyframes glow-saint {
+            0%,100% { box-shadow: 0 0 30px rgba(212,175,55,0.40), 0 0 60px rgba(212,175,55,0.12); }
+            50% { box-shadow: 0 0 50px rgba(212,175,55,0.65), 0 0 100px rgba(212,175,55,0.22); }
+        }
+        .hero-image-container img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+        .quote-box {
+            background: rgba(10, 22, 55, 0.80);
+            border: 2px solid rgba(212, 175, 55, 0.40);
+            border-radius: 16px;
+            padding: 24px 28px;
+            max-width: 660px;
+            margin: 28px auto;
+            position: relative;
+            backdrop-filter: blur(6px);
+        }
+        .quote-box::before {
+            content: '"';
+            position: absolute; top: 2px; left: 10px;
+            font-size: 72px; color: rgba(212,175,55,0.18);
+            font-family: Georgia, serif; line-height: 1;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, #b8870b 0%, #f7de6a 50%, #b8870b 100%);
+            background-size: 200% auto;
+            color: #06103a; border: none; font-weight: bold;
+            box-shadow: 0 4px 18px rgba(212,175,55,0.35);
+            transition: all 0.35s; padding: 15px 28px;
+            font-size: 19px; border-radius: 30px; font-family: 'Cinzel', serif;
+        }
+        .btn-primary:hover, .btn-primary:focus {
+            background-position: right center;
+            box-shadow: 0 7px 28px rgba(212,175,55,0.55);
+            transform: translateY(-3px); color: #06103a;
+        }
+        .btn-outline-light {
+            border: 2px solid rgba(255,255,255,0.65);
+            padding: 10px 20px; transition: all 0.3s; font-size: 17px; border-radius: 25px;
+        }
+        .btn-outline-light:hover { background: rgba(212,175,55,0.25); border-color: #d4af37; color: #d4af37; }
+
+        /* Day Cards */
+        .day-card {
+            background: rgba(8, 18, 50, 0.90);
+            border: 2.5px solid rgba(212,175,55,0.65);
+            border-radius: 16px; padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.30); height: 100%; margin-bottom: 20px;
+        }
+        .day-card:hover { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(212,175,55,0.28); border-color: rgba(212,175,55,0.9); }
+        .day-badge {
+            background: #d4af37; color: #06103a;
+            padding: 7px 16px; border-radius: 20px; font-weight: bold;
+            font-size: 19px; display: inline-block; margin-bottom: 14px;
+        }
+        .day-icon { font-size: 56px; color: #d4af37; text-shadow: 0 0 12px rgba(212,175,55,0.5); margin-bottom: 14px; }
+        .day-title { font-family: 'Cinzel', serif; color: #d4af37; font-size: 22px; font-weight: bold; margin-bottom: 14px; }
+        .day-description {
+            color: #e6e6e6; font-size: 17px; line-height: 1.55;
+            background: rgba(8,18,50,0.65); padding: 14px; border-radius: 10px; margin-bottom: 18px;
+        }
+
+        /* Fact Boxes */
+        .fact-box {
+            background: rgba(12, 26, 70, 0.80);
+            border-left: 4px solid #d4af37;
+            padding: 20px; margin-bottom: 20px;
+            border-radius: 0 12px 12px 0;
+        }
+        .fact-box h3 { font-size: 22px; margin-bottom: 12px; }
+        .fact-box p { font-size: 17px; line-height: 1.65; }
+
+        /* Instruction Cards */
+        .instruction-card {
+            background: rgba(12, 26, 70, 0.70);
+            border: 1px solid rgba(212,175,55,0.45);
+            border-radius: 16px; padding: 24px; height: 100%;
+            transition: transform 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.20);
+        }
+        .instruction-card:hover { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(212,175,55,0.20); border-color: rgba(212,175,55,0.70); }
+        .instruction-icon { font-size: 38px; color: #d4af37; margin-bottom: 18px; }
+        .benefit-icon { font-size: 38px; color: #d4af37; margin-bottom: 18px; text-shadow: 0 0 12px rgba(212,175,55,0.5); }
+
+        /* Audio CTA */
+        .audio-cta-container {
+            background: rgba(8, 18, 50, 0.90);
+            border: 2.5px solid rgba(212,175,55,0.65);
+            border-radius: 16px; box-shadow: 0 5px 18px rgba(0,0,0,0.28);
+            padding: 30px; margin: 40px auto; max-width: 900px;
+        }
+
+        /* Dividers */
+        .section-divider { display: flex; align-items: center; margin: 45px 0; }
+        .divider-line { flex-grow: 1; height: 2px; background: linear-gradient(to right, transparent, rgba(212,175,55,0.65), transparent); }
+        .divider-icon { font-size: 26px; color: #d4af37; margin: 0 18px; }
+
+        section { padding: 55px 0; }
+        .section-heading { position: relative; display: inline-block; margin-bottom: 38px; }
+        .section-heading::after {
+            content: ""; position: absolute; bottom: -14px; left: 50%;
+            transform: translateX(-50%); width: 90px; height: 3px;
+            background: #d4af37; border-radius: 3px;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: rgba(8, 18, 55, 0.97);
+            border-top: 2px solid rgba(212,175,55,0.45);
+            padding: 28px 0; margin-top: 48px;
+        }
+        .site-footer p { font-size: 16px; }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed; bottom: 20px; right: 20px;
+            background: rgba(212,175,55,0.92); color: #06103a;
+            width: 56px; height: 56px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; box-shadow: 0 2px 12px rgba(0,0,0,0.30);
+            z-index: 1000; cursor: pointer; transition: all 0.3s; opacity: 0;
+        }
+        .back-to-top:hover { background: #d4af37; transform: translateY(-3px); }
+
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212,175,55,0.4); } 70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(212,175,55,0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212,175,55,0); } }
+        @keyframes pulse-border { 0% { box-shadow: 0 0 0 0 #d4af37; } 70% { box-shadow: 0 0 0 6px rgba(212,175,55,0.25); } 100% { box-shadow: 0 0 0 0 #d4af37; } }
+        .pulse-border { animation: pulse-border 1.8s infinite; }
+
+        .temas-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 10px; margin-bottom: 18px; max-width: 420px; margin-left: auto; margin-right: auto; }
+        .temas-pills span { background: #fffbe6; color: #0f2042; border-radius: 18px; padding: 7px 14px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+
+        @media (max-width: 767px) {
+            body { font-size: 16px; }
+            h1 { font-size: 28px !important; }
+            h2 { font-size: 24px !important; }
+            h3 { font-size: 20px !important; }
+            .hero-image-container { width: 210px; height: 210px; }
+            .btn-primary { font-size: 17px; padding: 13px 22px; }
+            .section-divider { margin: 28px 0; }
+            .day-description { font-size: 15px; }
+        }
+        @media (max-width: 575px) {
+            .hero-image-container { width: 180px; height: 180px; }
+            .btn-outline-light { display: block; width: 100%; margin-top: 14px; }
+            .back-to-top { width: 48px; height: 48px; font-size: 22px; }
+        }
+
+        /* Knot ribbon decorative */
+        .knot-ornament { color: rgba(212,175,55,0.55); letter-spacing: 6px; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="overlay-pattern"></div>
+    <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand title-font golden-text" href="./">✦ N. Sra. Desatadora de Nós</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link active" href="./"><i class="fas fa-home me-2"></i>Início</a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://palpiitecerto.site/instrucoes"><i class="fas fa-book me-2"></i>Instruções</a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://palpiitecerto.site/jornada-de-7-dias"><i class="fas fa-calendar-day me-2"></i>Novena</a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://palpiitecerto.site/oracoes-especiais"><i class="fas fa-dove me-2"></i>Orações Especiais</a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://palpiitecerto.site/musicas-dos-anjos"><i class="fas fa-music me-2"></i>Músicas</a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://palpiitecerto.site/audiolivro"><i class="fas fa-headphones me-2"></i>Áudiolivro</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section id="inicio" class="hero-section text-center py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 col-md-11">
+                        <p class="knot-ornament mb-2">— ✦ DEVOÇÃO MARIANA ✦ —</p>
+                        <h1 class="title-font golden-text display-4 mb-2">Nossa Senhora<br>Desatadora de Nós</h1>
+                        <h2 class="text-white mb-5" style="font-size:1.3rem; font-weight:300; font-family:'IM Fell English',serif; font-style:italic;">Uma novena sagrada de 9 dias para desatar os nós da sua vida</h2>
+
+                        <div class="hero-image-container">
+                            <img src="images/nossa-senhora-desatadora.jpg" alt="Nossa Senhora Desatadora de Nós" class="img-fluid">
+                        </div>
+
+                        <div class="quote-box">
+                            <p class="text-white fs-4 fst-italic mt-2" style="font-family:'IM Fell English',serif;">"Ela pega a fita da nossa vida cheia de nós e a devolve lisa, desatada, com amor de Mãe."</p>
+                            <p class="golden-text fs-5 mt-2">— Devoção Mariana</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-ribbon"></i></div><div class="divider-line"></div></div>
+
+        <!-- Novena de 9 dias -->
+        <section id="jornada" class="py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11 text-center">
+                        <h2 class="title-font golden-text display-5 mb-2 section-heading">A Novena de 9 Dias</h2>
+                        <p class="text-white fs-5 mb-5">Orações poderosas que pedem a intercessão de Nossa Senhora para desatar cada nó da sua vida.</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8">
+                        <div class="day-card h-100 text-center">
+                            <div class="day-badge">9 Dias</div>
+                            <div class="day-icon"><i class="fas fa-pray"></i></div>
+                            <h3 class="day-title">Inicie Sua Novena de Nossa Senhora</h3>
+                            <p class="text-white fs-5 mb-2">9 orações poderosas — uma por dia — para cada nó da sua vida</p>
+                            <div class="section-divider" style="margin:16px 0;"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-star"></i></div><div class="divider-line"></div></div>
+                            <p class="day-description">Dedique 9 dias à intercessão de Nossa Senhora e sinta os nós da sua vida se desfazendo.</p>
+                            <a href="https://palpiitecerto.site/jornada-de-7-dias" class="btn btn-primary mt-2 mb-2 w-100 pulse-border" style="font-size:1.05rem;"><i class="fas fa-pray me-2"></i>Iniciar Minha Novena</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-dove"></i></div><div class="divider-line"></div></div>
+
+        <!-- Orações Especiais -->
+        <section id="oracoes-especiais" class="py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11 text-center">
+                        <h2 class="title-font golden-text display-5 mb-2 section-heading">Orações Especiais</h2>
+                        <p class="text-white fs-5 mb-5">Preces para cada necessidade da sua vida — saúde, família, trabalho, cura e mais.</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8">
+                        <div class="day-card h-100 text-center" style="max-width:480px;margin:auto;">
+                            <div class="day-badge">+80 Orações</div>
+                            <div class="day-icon"><i class="fas fa-dove"></i></div>
+                            <h3 class="day-title mb-2">Orações Especiais</h3>
+                            <p class="text-white fs-5 mb-2" style="font-weight:500;">Preces poderosas para cada necessidade da sua vida</p>
+                            <div class="section-divider" style="margin:16px 0;"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-star"></i></div><div class="divider-line"></div></div>
+                            <p class="day-description" style="font-size:16px;">Mais de 80 orações divididas em 8 temas essenciais, cada uma criada para desatar situações específicas:</p>
+                            <div class="temas-pills mb-3">
+                                <span><i class="fas fa-heartbeat"></i> Cura física</span>
+                                <span><i class="fas fa-users"></i> Proteção familiar</span>
+                                <span><i class="fas fa-unlock"></i> Libertação</span>
+                                <span><i class="fas fa-coins"></i> Prosperidade</span>
+                                <span><i class="fas fa-smile"></i> Paz emocional</span>
+                                <span><i class="fas fa-leaf"></i> Renovo espiritual</span>
+                                <span><i class="fas fa-hands-praying"></i> Fé em ação</span>
+                                <span><i class="fas fa-bolt"></i> Pedidos urgentes</span>
+                            </div>
+                            <a href="https://palpiitecerto.site/oracoes-especiais" class="btn btn-primary mt-2 mb-2 w-100 pulse-border" style="font-size:1.05rem;"><i class="fas fa-dove me-2"></i>Acessar Minhas Orações Especiais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-headphones-simple"></i></div><div class="divider-line"></div></div>
+
+        <!-- Audiolivro -->
+        <section id="audiobook" class="py-5">
+            <div class="container">
+                <div class="audio-cta-container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 text-center">
+                            <h2 class="title-font golden-text fs-1 mb-3">Ouça Sua Novena em Áudio</h2>
+                            <p class="text-white fs-5 mb-4">As orações narradas com música sacra para uma conexão ainda mais profunda com Nossa Senhora.</p>
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-4">
+                                    <div class="benefit-icon"><i class="fas fa-brain"></i></div>
+                                    <h3 class="golden-text fs-5 mb-2">Meditação Profunda</h3>
+                                    <p class="text-white" style="font-size:16px;">Absorva cada palavra enquanto uma voz serena guia sua oração a Nossa Senhora.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="benefit-icon"><i class="fas fa-heart"></i></div>
+                                    <h3 class="golden-text fs-5 mb-2">Experiência Imersiva</h3>
+                                    <p class="text-white" style="font-size:16px;">Música sacra mariana e narração profissional criam um ambiente de elevação espiritual.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="benefit-icon"><i class="fas fa-mobile-screen"></i></div>
+                                    <h3 class="golden-text fs-5 mb-2">Em Qualquer Lugar</h3>
+                                    <p class="text-white" style="font-size:16px;">Leve sua novena para caminhadas, antes de dormir ou no seu momento de oração.</p>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary pulse-border mb-2 w-100" style="font-size:1.05rem;"><i class="fas fa-headphones me-2"></i>Obtenha o Audiolivro Completo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-book-open"></i></div><div class="divider-line"></div></div>
+
+        <!-- Quem é Nossa Senhora Desatadora de Nós? -->
+        <section id="sobre" class="py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11 text-center">
+                        <h2 class="title-font golden-text display-5 mb-2 section-heading">Quem é Nossa Senhora Desatadora de Nós?</h2>
+                    </div>
+                </div>
+                <div class="row align-items-start mt-4">
+                    <div class="col-md-5 text-center mb-4 mb-md-0">
+                        <img src="images/nossa-senhora-desatadora.jpg" alt="Nossa Senhora Desatadora de Nós"
+                             class="img-fluid rounded shadow"
+                             style="max-width:280px; border:4px solid #d4af37; border-radius:16px;">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="fact-box">
+                            <h3 class="golden-text mb-2"><i class="fas fa-paint-brush me-2"></i>A Pintura Sagrada</h3>
+                            <p>A imagem tem origem em uma pintura de 1700 do artista alemão Johann Georg Melchior Schmidtner, localizada na Capela de São Pedro em Perlach, em Augsburgo, Alemanha. Ela retrata Maria desfazendo os nós de uma fita branca — símbolo das dificuldades e pecados da humanidade.</p>
+                        </div>
+                        <div class="fact-box">
+                            <h3 class="golden-text mb-2"><i class="fas fa-globe-americas me-2"></i>A Devoção do Papa Francisco</h3>
+                            <p>O Papa Francisco, ainda jovem sacerdote, encontrou essa imagem na Alemanha e trouxe sua devoção para a Argentina. A partir daí, a devoção se espalhou por toda a América Latina e o mundo, tornando-se uma das mais amadas invocações marianas do nosso tempo.</p>
+                        </div>
+                        <div class="fact-box">
+                            <h3 class="golden-text mb-2"><i class="fas fa-ribbon me-2"></i>O Significado dos Nós</h3>
+                            <p>Os nós representam as dificuldades, os pecados, os medos e os problemas que aprisionam nossa vida. Maria, com sua ternura de Mãe, intercede junto a Deus para desfazer cada nó — devolvendo a nós a paz, a liberdade e a graça.</p>
+                        </div>
+                        <div class="quote-box p-4 mt-3 position-relative">
+                            <i class="fas fa-quote-left position-absolute text-warning opacity-25 fa-3x" style="top:10px;left:10px;"></i>
+                            <p class="fs-5 ms-5 mt-2 mb-2" style="font-family:'IM Fell English',serif; font-style:italic; line-height:1.65;">
+                                "Santa Maria, cheia de presença de Deus, durante os dias da tua vida aceitaste com toda humildade a vontade do Pai, e o Maligno nunca foi capaz de te enredar em seus nós de mentira e morte..."
+                            </p>
+                            <p class="text-end golden-text fs-6 mt-2">— Oração a Nossa Senhora Desatadora de Nós</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-info-circle"></i></div><div class="divider-line"></div></div>
+
+        <!-- Como Usar -->
+        <section id="instrucoes-breve" class="py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11 text-center">
+                        <h2 class="title-font golden-text display-5 mb-2 section-heading">Como Fazer a Novena</h2>
+                        <p class="text-white fs-5 mb-5">Para aproveitar ao máximo esta jornada espiritual, siga estas orientações:</p>
+                    </div>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="instruction-card text-center">
+                            <div class="instruction-icon"><i class="fas fa-calendar-day"></i></div>
+                            <h3 class="golden-text title-font fs-5 mb-3">Reze 9 Dias Seguidos</h3>
+                            <p class="text-white" style="font-size:16px;">Dedique-se a uma oração por dia, seguindo a sequência da novena para maior fruto espiritual.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="instruction-card text-center">
+                            <div class="instruction-icon"><i class="fas fa-clock"></i></div>
+                            <h3 class="golden-text title-font fs-5 mb-3">Escolha um Momento Tranquilo</h3>
+                            <p class="text-white" style="font-size:16px;">Reserve um horário fixo — de manhã ou à noite — para orar em silêncio, sem distrações.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="instruction-card text-center">
+                            <div class="instruction-icon"><i class="fas fa-heart"></i></div>
+                            <h3 class="golden-text title-font fs-5 mb-3">Ore com Confiança</h3>
+                            <p class="text-white" style="font-size:16px;">Entregue seus nós a Nossa Senhora com fé. Ela é Mãe e intercede por cada filho que a invoca.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <a href="https://palpiitecerto.site/instrucoes" class="btn btn-outline-light btn-lg mt-4">
+                            <i class="fas fa-info-circle me-2"></i>Ver Instruções Completas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-undo-alt"></i></div><div class="divider-line"></div></div>
+
+        <!-- Reembolso -->
+        <div id="reembolso" class="container mb-4">
+            <div class="p-4" style="background:linear-gradient(135deg,#fffbe6 0%,#f8f4e3 100%);border:2.5px solid #d4af37;border-radius:16px;box-shadow:0 4px 18px rgba(212,175,55,0.08);text-align:center;max-width:520px;margin:0 auto;">
+                <div style="font-size:2rem;color:#d4af37;margin-bottom:10px;"><i class="fas fa-shield-alt"></i></div>
+                <h3 class="mb-2" style="color:#222;font-family:'Cinzel',serif;font-weight:bold;font-size:1.5rem;">Não ficou satisfeito?</h3>
+                <p style="color:#444;font-size:1.05rem;margin-bottom:16px;">Oferecemos garantia total de satisfação. Solicite seu reembolso de forma rápida e segura.</p>
+                <a href="https://palpiitecerto.site/reembolso" class="btn btn-danger fw-bold px-4 py-2 pulse-border" style="font-size:1.05rem;border-radius:30px;"><i class="fas fa-undo-alt me-2"></i>Quero pedir um reembolso</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-1">© 2025 · Novena de Nossa Senhora Desatadora de Nós</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p>Contato: <a href="mailto:suportepadrelucaslima@gmail.com" class="text-white">suportepadrelucaslima@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        const btn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => { btn.style.opacity = window.pageYOffset > 300 ? '1' : '0'; });
+        btn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    </script>
+</body></html>

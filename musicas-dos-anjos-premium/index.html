@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="pt"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Músicas dos Anjos — Coleção Premium</title>
+  <link rel="stylesheet" href="../inicio-oracoes-principal/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../inicio-oracoes-principal/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body,html{margin:0;padding:0;font-family:'Lato',sans-serif;background:linear-gradient(160deg,#0d1f50 0%,#0a1640 50%,#0e1e4a 100%);background-attachment:fixed;color:white;min-height:100vh}
+    .title-font{font-family:'Cinzel',serif}.golden-text{color:#d4af37}
+    .overlay-pattern{background-image:url('https://www.transparenttextures.com/patterns/crosses.png');opacity:.06;position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
+    .site-header{padding:12px 0;background:rgba(8,18,55,.97);border-bottom:2px solid rgba(212,175,55,.45);position:sticky;top:0;z-index:100}
+    .back-link{color:#d4af37;text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-weight:bold;font-size:17px}.back-link:hover{color:#fff}
+    .section-divider{display:flex;align-items:center;margin:28px 0}
+    .divider-line{flex-grow:1;height:2px;background:linear-gradient(to right,transparent,rgba(212,175,55,.65),transparent)}
+    .divider-icon{font-size:22px;color:#d4af37;margin:0 16px}
+    .music-card{background:rgba(8,18,50,.90);border:1px solid rgba(212,175,55,.30);border-radius:16px;overflow:hidden;transition:border-color .3s,transform .3s;height:100%}
+    .music-card:hover{border-color:rgba(212,175,55,.70);transform:translateY(-4px)}
+    .video-wrapper{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
+    .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+    .music-info{padding:14px 16px}
+    .music-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:bold;margin-bottom:8px;font-family:'Cinzel',serif}
+    .badge-instrumental{background:rgba(91,159,255,.20);color:#8bbfff;border:1px solid rgba(91,159,255,.35)}
+    .badge-louvor{background:rgba(212,175,55,.20);color:#d4af37;border:1px solid rgba(212,175,55,.35)}
+    .badge-gregoriano{background:rgba(255,107,53,.20);color:#ff9b65;border:1px solid rgba(255,107,53,.35)}
+    .badge-oração{background:rgba(53,199,133,.20);color:#5fd9a3;border:1px solid rgba(53,199,133,.35)}
+    .music-title{font-family:'Cinzel',serif;color:white;font-size:.92rem;font-weight:600;margin:0 0 4px;line-height:1.3}
+    .music-duration{color:rgba(212,175,55,.65);font-size:.80rem;display:flex;align-items:center;gap:5px}
+    /* WALL */
+    .premium-wall{background:rgba(8,18,50,.95);border:2px solid rgba(212,175,55,.55);border-radius:18px;padding:36px 24px;text-align:center;max-width:500px;margin:60px auto}
+    .wall-icon{font-size:52px;color:#d4af37;margin-bottom:16px;opacity:.80}
+    .wall-title{font-family:'Cinzel',serif;color:#d4af37;font-size:1.3rem;margin-bottom:10px}
+    .wall-text{color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.65;margin-bottom:24px}
+    .btn-comprar{background:linear-gradient(135deg,#b8870b,#f7de6a,#b8870b);background-size:200% auto;color:#06103a;border:none;font-weight:bold;padding:14px 28px;border-radius:30px;font-size:1rem;font-family:'Cinzel',serif;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;animation:pulse 3s infinite}
+    @keyframes pulse{0%,100%{box-shadow:0 4px 16px rgba(212,175,55,.5)}50%{box-shadow:0 6px 28px rgba(212,175,55,.8)}}
+    .btn-comprar:hover{background-position:right center;color:#06103a}
+    .btn-ja-comprei{border:1px solid rgba(212,175,55,.45);color:rgba(212,175,55,.80);background:none;padding:10px 22px;border-radius:25px;font-size:.88rem;text-decoration:none;display:inline-block;margin-top:12px;transition:all .3s}
+    .btn-ja-comprei:hover{background:rgba(212,175,55,.12);color:#d4af37}
+    .site-footer{background:rgba(8,18,55,.97);border-top:2px solid rgba(212,175,55,.45);padding:20px 0;margin-top:48px;text-align:center;font-size:14px;color:rgba(255,255,255,.45)}
+  </style>
+</head>
+<body>
+<div class="overlay-pattern"></div>
+<header class="site-header">
+  <div class="container"><a href="../produto-premium/" class="back-link"><i class="fas fa-arrow-left"></i> Biblioteca Sagrada</a></div>
+</header>
+
+<!-- WALL (não comprou) -->
+<div id="premium-wall">
+  <div class="premium-wall">
+    <div class="wall-icon"><i class="fas fa-music"></i></div>
+    <h2 class="wall-title">Músicas dos Anjos</h2>
+    <p class="wall-text">Este conteúdo é exclusivo para membros. Adquira o acesso para entrar na coleção sagrada de músicas dos anjos — do gregoriano ao louvor, para orar, meditar e se conectar com o Céu.</p>
+    <a href="https://pay.kiwify.com.br/SyNkLYS" class="btn-comprar"><i class="fas fa-lock-open"></i> Quero Ter Acesso</a><br>
+    <a href="../login/" class="btn-ja-comprei">Já comprei — Entrar</a>
+  </div>
+</div>
+
+<!-- CONTEÚDO (comprou) -->
+<div id="conteudo-premium" style="display:none">
+<main class="py-4">
+<div class="container" style="max-width:1060px">
+
+  <div class="text-center mb-2">
+    <p style="color:rgba(212,175,55,.65);letter-spacing:4px;font-size:.72rem;font-family:'Cinzel',serif;">— ✦ CONTEMPLAÇÃO CELESTIAL ✦ —</p>
+    <h1 class="title-font golden-text" style="font-size:1.9rem">Músicas dos Anjos</h1>
+    <p style="color:rgba(255,255,255,.55);font-family:'IM Fell English',serif;font-style:italic;font-size:.95rem">Bem-vindo, <span id="email-logado"></span></p>
+    <p style="color:rgba(255,255,255,.45);font-size:.88rem;margin-top:8px;max-width:580px;margin-left:auto;margin-right:auto">Uma coleção exclusiva de músicas sagradas para elevar seu espírito, aprofundar a oração e se conectar com a presença dos anjos.</p>
+  </div>
+
+  <div class="section-divider"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-music"></i></div><div class="divider-line"></div></div>
+
+  <div class="row g-4">
+
+    <!-- 1 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/Xs1WPdwDmHU" title="Música Relaxante para Atrair os Anjos" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-instrumental">INSTRUMENTAL</span>
+          <p class="music-title">Música Relaxante para Atrair os Anjos</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 1h 07min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/q_WpbiKTLcg" title="Som dos Anjos para Orar — Rafael Brito" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-instrumental">CONTEMPLAÇÃO</span>
+          <p class="music-title">Som dos Anjos para Orar — Rafael Brito</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 2h 16min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/zKVxmxfFxFc" title="Sanctus — Música Instrumental Católica" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-gregoriano">GREGORIANO</span>
+          <p class="music-title">Sanctus — Música Instrumental Católica</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 1h 00min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/riLJtn5CFtI" title="Fundo Musical — Som do Céu" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-instrumental">FUNDO MUSICAL</span>
+          <p class="music-title">Fundo Musical — Som do Céu</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 2h 23min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/tB8ecC3kZAw" title="Fundo Musical — Aleluia Angelical" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-louvor">ALELUIA</span>
+          <p class="music-title">Fundo Musical — Aleluia Angelical</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 1h 05min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/rwyBPyXcq7Q" title="Os Três Arcanjos — Louvor Especial" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-louvor">LOUVOR</span>
+          <p class="music-title">Os Três Arcanjos — Louvor Especial</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 35min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/bDXeRe8AqpI" title="Eles Vão Te Proteger — Arcanjos" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-louvor">PROTEÇÃO</span>
+          <p class="music-title">Eles Vão Te Proteger — Arcanjos</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 6min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/g60EQ1xR7xw" title="Miguel, Rafael e Gabriel — Oração Musical" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-oração">ORAÇÃO</span>
+          <p class="music-title">Miguel, Rafael e Gabriel — Oração Musical</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 26min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/xaHfJ6Fdx5U" title="Oração aos Arcanjos — Padre Reginaldo" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-oração">ORAÇÃO</span>
+          <p class="music-title">Oração aos Arcanjos — Padre Reginaldo</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 4min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/WlyD11B8V1s" title="São Miguel Arcanjo — Guerreiro da Luz" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-louvor">LOUVOR</span>
+          <p class="music-title">São Miguel Arcanjo — Guerreiro da Luz</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 5min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/J2T5ZnD38H8" title="Padre Reginaldo Manzotti — Arcanjos" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-louvor">LOUVOR</span>
+          <p class="music-title">Padre Reginaldo Manzotti — Arcanjos</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 4min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="col-md-6 col-xl-4">
+      <div class="music-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/_eRTruOX-ic" title="Cantos Gregorianos — Espírito Santo" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="music-info">
+          <span class="music-badge badge-gregoriano">GREGORIANO</span>
+          <p class="music-title">Cantos Gregorianos — Espírito Santo</p>
+          <span class="music-duration"><i class="fas fa-clock"></i> 36min</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /row -->
+
+  <div class="section-divider"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-music"></i></div><div class="divider-line"></div></div>
+  <p class="text-center" style="color:rgba(255,255,255,.40);font-size:.85rem;font-family:'IM Fell English',serif;font-style:italic">"Aqueles que cantam rezam duas vezes." — Santo Agostinho</p>
+
+</div>
+</main>
+</div>
+
+<footer class="site-footer"><p class="mb-0">© 2025 · Músicas dos Anjos · Conexão Prosperidade</p></footer>
+<script src="../js/auth.js"></script>
+<script>protegerPagina('musicas-dos-anjos-premium');</script>
+</body></html>

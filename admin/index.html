@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin — Conexão Prosperidade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: linear-gradient(160deg, #0d1f50 0%, #0a1640 50%, #0e1e4a 100%);
+      background-attachment: fixed;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    .admin-header {
+      background: rgba(8,18,55,.97);
+      border-bottom: 2px solid rgba(212,175,55,.45);
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .admin-header h1 {
+      font-family: 'Cinzel', serif;
+      color: #d4af37;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .admin-header span {
+      font-size: .82rem;
+      color: rgba(255,255,255,.45);
+      margin-left: 10px;
+    }
+    .btn-logout {
+      background: none;
+      border: 1.5px solid rgba(212,175,55,.4);
+      color: rgba(212,175,55,.8);
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: .82rem;
+      cursor: pointer;
+      font-family: 'Lato', sans-serif;
+      transition: all .2s;
+    }
+    .btn-logout:hover { background: rgba(212,175,55,.1); color: #d4af37; }
+
+    /* LOADING */
+    #loading {
+      display: flex; align-items: center; justify-content: center;
+      height: 60vh; flex-direction: column; gap: 16px;
+    }
+    .spinner {
+      width: 44px; height: 44px;
+      border: 3px solid rgba(212,175,55,.2);
+      border-top-color: #d4af37;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* MAIN */
+    .main { padding: 28px 20px 60px; max-width: 1200px; margin: 0 auto; }
+
+    /* STATS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: rgba(8,18,50,.92);
+      border: 1px solid rgba(212,175,55,.25);
+      border-radius: 16px;
+      padding: 20px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    }
+    .stat-icon { font-size: 1.6rem; margin-bottom: 10px; opacity: .75; }
+    .stat-num {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #d4af37;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: .78rem; color: rgba(255,255,255,.5); line-height: 1.4; }
+    .stat-card.total { border-color: rgba(212,175,55,.55); }
+    .stat-card.total .stat-num { font-size: 2.4rem; }
+
+    /* FILTROS */
+    .filters {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-bottom: 20px; align-items: center;
+    }
+    .search-box {
+      flex: 1; min-width: 220px;
+      background: rgba(255,255,255,.07);
+      border: 1.5px solid rgba(212,175,55,.25);
+      border-radius: 12px;
+      color: #fff;
+      padding: 10px 16px;
+      font-size: .92rem;
+      font-family: 'Lato', sans-serif;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .search-box::placeholder { color: rgba(255,255,255,.3); }
+    .search-box:focus { border-color: rgba(212,175,55,.6); }
+    .filter-select {
+      background: rgba(255,255,255,.07);
+      border: 1.5px solid rgba(212,175,55,.25);
+      border-radius: 12px;
+      color: #fff;
+      padding: 10px 14px;
+      font-size: .88rem;
+      font-family: 'Lato', sans-serif;
+      outline: none;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .filter-select option { background: #0a1640; }
+    .filter-select:focus { border-color: rgba(212,175,55,.6); }
+    .result-count { font-size: .82rem; color: rgba(255,255,255,.4); margin-left: auto; }
+
+    /* TABLE */
+    .table-wrap {
+      background: rgba(8,18,50,.92);
+      border: 1px solid rgba(212,175,55,.20);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: rgba(212,175,55,.08); }
+    th {
+      padding: 14px 18px;
+      text-align: left;
+      font-family: 'Cinzel', serif;
+      font-size: .75rem;
+      font-weight: 600;
+      color: rgba(212,175,55,.8);
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(212,175,55,.15);
+    }
+    td {
+      padding: 13px 18px;
+      font-size: .88rem;
+      color: rgba(255,255,255,.82);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(212,175,55,.04); }
+
+    .produto-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+    .badge-novena       { background: rgba(91,159,255,.15); color: #8bbfff; border: 1px solid rgba(91,159,255,.3); }
+    .badge-arcanjos     { background: rgba(255,107,53,.15);  color: #ff9b65; border: 1px solid rgba(255,107,53,.3); }
+    .badge-francisco    { background: rgba(53,199,133,.15);  color: #5fd9a3; border: 1px solid rgba(53,199,133,.3); }
+    .badge-musicas      { background: rgba(180,100,255,.15); color: #d09fff; border: 1px solid rgba(180,100,255,.3); }
+    .badge-grimorio     { background: rgba(212,175,55,.15);  color: #d4af37; border: 1px solid rgba(212,175,55,.3); }
+
+    .status-ativo   { color: #5fd9a3; font-size: .82rem; }
+    .status-inativo { color: rgba(255,255,255,.35); font-size: .82rem; }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: rgba(255,255,255,.35);
+      font-size: .92rem;
+    }
+
+    /* UPDATE BAR */
+    .update-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px; font-size: .78rem; color: rgba(255,255,255,.35);
+    }
+    .btn-refresh {
+      background: none; border: 1px solid rgba(212,175,55,.3);
+      color: rgba(212,175,55,.7); padding: 5px 12px; border-radius: 16px;
+      font-size: .78rem; cursor: pointer; font-family: 'Lato', sans-serif;
+      transition: all .2s; display: flex; align-items: center; gap: 6px;
+    }
+    .btn-refresh:hover { background: rgba(212,175,55,.1); color: #d4af37; }
+
+    @media (max-width: 600px) {
+      .main { padding: 16px 12px 48px; }
+      th, td { padding: 10px 12px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header class="admin-header">
+  <div>
+    <h1><i class="fas fa-shield-halved me-2" style="font-size:1rem"></i>Painel Admin</h1>
+    <span id="admin-email"></span>
+  </div>
+  <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt me-1"></i>Sair</button>
+</header>
+
+<div id="loading">
+  <div class="spinner"></div>
+  <p style="color:rgba(255,255,255,.4);font-size:.9rem">Carregando dados...</p>
+</div>
+
+<div class="main" id="dashboard" style="display:none">
+
+  <!-- Stats -->
+  <div class="stats-grid" id="stats-grid"></div>
+
+  <!-- Tabela -->
+  <div class="update-bar">
+    <span id="ultima-atualizacao"></span>
+    <button class="btn-refresh" onclick="carregarDados()">
+      <i class="fas fa-rotate-right"></i> Atualizar
+    </button>
+  </div>
+
+  <div class="filters">
+    <input type="text" class="search-box" id="busca" placeholder="🔍  Buscar por e-mail..." oninput="filtrar()">
+    <select class="filter-select" id="filtro-produto" onchange="filtrar()">
+      <option value="">Todos os produtos</option>
+      <option value="novena-principal">Novena Principal</option>
+      <option value="poder-dos-arcanjos">Poder dos 4 Arcanjos</option>
+      <option value="30-oracoes-sao-francisco">30 Orações São Francisco</option>
+      <option value="musicas-dos-anjos-premium">Músicas dos Anjos</option>
+      <option value="grimorio-dos-arcanjos">Grimório dos Arcanjos</option>
+    </select>
+    <span class="result-count" id="result-count"></span>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>E-mail</th>
+          <th>Produto</th>
+          <th>Status</th>
+          <th>Compra</th>
+          <th>Último acesso</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-body"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+  const NOMES = {
+    'novena-principal':        'Novena Principal',
+    'poder-dos-arcanjos':      'Poder dos 4 Arcanjos',
+    '30-oracoes-sao-francisco':'30 Orações São Francisco',
+    'musicas-dos-anjos-premium':'Músicas dos Anjos',
+    'grimorio-dos-arcanjos':   'Grimório dos Arcanjos',
+  };
+  const BADGE = {
+    'novena-principal':         'badge-novena',
+    'poder-dos-arcanjos':       'badge-arcanjos',
+    '30-oracoes-sao-francisco': 'badge-francisco',
+    'musicas-dos-anjos-premium':'badge-musicas',
+    'grimorio-dos-arcanjos':    'badge-grimorio',
+  };
+  const ICONE = {
+    'novena-principal':         '🕊️',
+    'poder-dos-arcanjos':       '⚔️',
+    '30-oracoes-sao-francisco': '🌿',
+    'musicas-dos-anjos-premium':'🎵',
+    'grimorio-dos-arcanjos':    '📖',
+  };
+
+  let todosRegistros = [];
+
+  function logout() {
+    localStorage.removeItem('conexao_token');
+    window.location.href = '/login/';
+  }
+
+  function formatarData(iso) {
+    if (!iso) return '—';
+    const d = new Date(iso);
+    return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function renderStats(dados) {
+    const contagem = {};
+    dados.forEach(r => { contagem[r.produto_id] = (contagem[r.produto_id] || 0) + 1; });
+    const emailsUnicos = new Set(dados.map(r => r.email)).size;
+
+    const produtos = ['novena-principal','poder-dos-arcanjos','30-oracoes-sao-francisco','musicas-dos-anjos-premium','grimorio-dos-arcanjos'];
+
+    let html = `<div class="stat-card total">
+      <div class="stat-icon">👥</div>
+      <div class="stat-num">${emailsUnicos}</div>
+      <div class="stat-label">Clientes únicos</div>
+    </div>`;
+
+    produtos.forEach(p => {
+      html += `<div class="stat-card">
+        <div class="stat-icon">${ICONE[p] || '📦'}</div>
+        <div class="stat-num">${contagem[p] || 0}</div>
+        <div class="stat-label">${NOMES[p] || p}</div>
+      </div>`;
+    });
+
+    document.getElementById('stats-grid').innerHTML = html;
+  }
+
+  function filtrar() {
+    const busca = document.getElementById('busca').value.toLowerCase();
+    const produto = document.getElementById('filtro-produto').value;
+
+    const filtrados = todosRegistros.filter(r => {
+      const matchEmail = r.email.includes(busca);
+      const matchProduto = !produto || r.produto_id === produto;
+      return matchEmail && matchProduto;
+    });
+
+    renderTabela(filtrados);
+    document.getElementById('result-count').textContent = `${filtrados.length} registro${filtrados.length !== 1 ? 's' : ''}`;
+  }
+
+  function renderTabela(dados) {
+    const tbody = document.getElementById('tabela-body');
+    if (!dados.length) {
+      tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state"><i class="fas fa-inbox" style="font-size:2rem;display:block;margin-bottom:10px;opacity:.4"></i>Nenhum registro encontrado</div></td></tr>`;
+      return;
+    }
+    tbody.innerHTML = dados.map(r => {
+      const acessou = r.ultimo_acesso
+        ? `<span style="color:#5fd9a3"><i class="fas fa-circle-check" style="margin-right:5px"></i>${formatarData(r.ultimo_acesso)}</span>`
+        : `<span style="color:rgba(255,255,255,.3)"><i class="fas fa-clock" style="margin-right:5px"></i>Nunca acessou</span>`;
+      return `<tr>
+        <td>${r.email}</td>
+        <td><span class="produto-badge ${BADGE[r.produto_id] || ''}">${NOMES[r.produto_id] || r.produto_id}</span></td>
+        <td>${r.ativo ? '<span class="status-ativo"><i class="fas fa-check-circle me-1"></i>Ativo</span>' : '<span class="status-inativo"><i class="fas fa-times-circle me-1"></i>Inativo</span>'}</td>
+        <td style="color:rgba(255,255,255,.55)">${formatarData(r.created_at)}</td>
+        <td>${acessou}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  async function carregarDados() {
+    const token = localStorage.getItem('conexao_token');
+    try {
+      const res = await fetch('/api/admin', { headers: { 'Authorization': 'Bearer ' + token } });
+      if (res.status === 401 || res.status === 403) { logout(); return; }
+      const data = await res.json();
+      todosRegistros = data.compradores || [];
+      renderStats(todosRegistros);
+      filtrar();
+      document.getElementById('ultima-atualizacao').textContent = 'Última atualização: ' + new Date().toLocaleTimeString('pt-BR');
+    } catch {
+      document.getElementById('ultima-atualizacao').textContent = 'Erro ao carregar dados.';
+    }
+  }
+
+  // Init
+  (function init() {
+    const token = localStorage.getItem('conexao_token');
+    if (!token) { window.location.href = '/login/'; return; }
+
+    let payload;
+    try { payload = JSON.parse(atob(token.split('.')[1])); } catch { window.location.href = '/login/'; return; }
+    if (payload.role !== 'admin') { window.location.href = '/inicio-oracoes-principal/'; return; }
+
+    document.getElementById('admin-email').textContent = payload.email;
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    carregarDados();
+  })();
+</script>
+</body>
+</html>

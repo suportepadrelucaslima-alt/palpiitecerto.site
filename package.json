@@ -1,0 +1,13 @@
+{
+  "name": "palpiitecerto",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'static site'"
+  },
+  "engines": { "node": "24.x" },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "jsonwebtoken": "^9.0.0"
+  }
+}

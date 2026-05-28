@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Novena de Nossa Senhora Desatadora de Nós</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100vh;
+      font-family: 'Lato', sans-serif;
+      background: #07133a;
+    }
+
+    /* ── FUNDO FIXO COM A IMAGEM ── */
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      background: url('images/nossa-senhora-desatadora.jpg') center top / cover no-repeat;
+      z-index: 0;
+    }
+    .page-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(5,10,40,0.55) 0%,
+        rgba(5,10,40,0.72) 60%,
+        rgba(5,10,40,0.96) 100%
+      );
+    }
+
+    /* ── ESTRELAS ── */
+    .stars { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+    .s {
+      position: absolute; border-radius: 50%;
+      background: #fff; opacity: 0;
+      animation: tw var(--d) var(--dl) infinite;
+    }
+    @keyframes tw {
+      0%,100% { opacity: 0; } 50% { opacity: 0.85; }
+    }
+
+    /* ── LAYOUT ── */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      padding-bottom: 0;
+    }
+
+    /* ── FOTO DE NOSSA SENHORA — visível acima do card ── */
+    .saint-photo-wrap {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: -50px; /* sobrepõe o card */
+    }
+    .saint-photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 20%;
+      border: 4px solid #D4AF37;
+      box-shadow:
+        0 0 0 6px rgba(212,175,55,0.20),
+        0 8px 36px rgba(0,0,0,0.55);
+      animation: glow 3s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%,100% { box-shadow: 0 0 0 6px rgba(212,175,55,0.18), 0 8px 36px rgba(0,0,0,0.55); }
+      50%      { box-shadow: 0 0 0 10px rgba(212,175,55,0.35), 0 8px 44px rgba(212,175,55,0.30); }
+    }
+
+    /* ── CARD ── */
+    .login-card {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      background: rgba(7, 18, 58, 0.88);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-top: 1.5px solid rgba(212,175,55,0.35);
+      border-radius: 36px 36px 0 0;
+      padding: 70px 28px 56px; /* espaço pro foto sobreposta */
+      box-shadow: 0 -6px 50px rgba(0,0,0,0.40);
+      text-align: center;
+    }
+
+    /* alça */
+    .handle {
+      width: 44px; height: 4px;
+      background: rgba(212,175,55,0.35);
+      border-radius: 2px;
+      margin: 0 auto 24px;
+      display: none; /* aparece só no mobile — habilitado via JS */
+    }
+
+    .label-top {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(212,175,55,0.80);
+      margin-bottom: 6px;
+    }
+    .title-card {
+      font-family: 'Cinzel', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+    .subtitle-card {
+      font-size: 0.90rem;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    /* ornamento */
+    .orn { color: rgba(212,175,55,0.50); letter-spacing: 8px; font-size: 0.78rem; margin-bottom: 22px; }
+
+    /* Campo */
+    .field-label {
+      display: block;
+      text-align: left;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #D4AF37;
+      letter-spacing: 0.4px;
+      margin-bottom: 8px;
+    }
+    .field-input {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1.5px solid rgba(212,175,55,0.28);
+      border-radius: 14px;
+      color: #fff;
+      font-size: 1rem;
+      padding: 15px 18px;
+      outline: none;
+      transition: border-color .25s, box-shadow .25s;
+      -webkit-appearance: none;
+    }
+    .field-input::placeholder { color: rgba(255,255,255,0.28); }
+    .field-input:focus {
+      border-color: #D4AF37;
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.16);
+      background: rgba(255,255,255,0.10);
+    }
+
+    /* Botão */
+    .btn-enter {
+      display: block;
+      width: 100%;
+      margin-top: 18px;
+      padding: 16px;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #06103a;
+      background: linear-gradient(135deg, #c9950a 0%, #f7de6a 50%, #c9950a 100%);
+      background-size: 200% auto;
+      box-shadow: 0 5px 30px rgba(212,175,55,0.45);
+      cursor: pointer;
+      transition: background-position .4s, transform .2s, box-shadow .3s;
+    }
+    .btn-enter:hover  { background-position: right center; transform: translateY(-2px); box-shadow: 0 8px 38px rgba(212,175,55,0.60); }
+    .btn-enter:active { transform: translateY(0); }
+
+    /* Citação */
+    .quote {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(212,175,55,0.14);
+      font-size: 0.88rem;
+      font-style: italic;
+      color: rgba(212,175,55,0.70);
+      line-height: 1.65;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.22);
+      margin-top: 16px;
+    }
+
+    /* ── DESKTOP ── */
+    @media (min-width: 540px) {
+      body { justify-content: center; padding: 40px 16px; }
+      .saint-photo-wrap { margin-bottom: -60px; }
+      .saint-photo { width: 150px; height: 150px; }
+      .login-card {
+        border-radius: 28px;
+        border: 1.5px solid rgba(212,175,55,0.30);
+        max-width: 420px;
+        padding: 80px 40px 44px;
+        box-shadow: 0 16px 70px rgba(0,0,0,0.50);
+      }
+      .title-card { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-bg"></div>
+  <div class="stars" id="stars"></div>
+
+  <!-- Foto sobreposta ao card -->
+  <div class="saint-photo-wrap">
+    <img
+      src="images/nossa-senhora-desatadora.jpg"
+      alt="Nossa Senhora Desatadora de Nós"
+      class="saint-photo"
+    >
+  </div>
+
+  <!-- Card de login -->
+  <div class="login-card">
+    <div class="handle" id="handle"></div>
+
+    <p class="label-top">✦ Devoção Mariana ✦</p>
+    <h1 class="title-card">Nossa Senhora<br>Desatadora de Nós</h1>
+    <p class="subtitle-card">Novena Sagrada de 9 Dias</p>
+
+    <div class="orn">— ✦ —</div>
+
+    <!-- Aviso de e-mail da compra -->
+    <div id="avisoEmail" style="
+      background: rgba(212,175,55,.10);
+      border: 1px solid rgba(212,175,55,.35);
+      border-radius: 12px;
+      padding: 12px 14px 12px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      text-align: left;
+    ">
+      <i class="fas fa-circle-info" style="color:#d4af37;margin-top:2px;flex-shrink:0;font-size:.95rem"></i>
+      <p style="margin:0;font-size:.84rem;color:rgba(255,255,255,.75);line-height:1.55;flex:1">
+        Use o <strong style="color:#d4af37">mesmo e-mail</strong> que você informou na hora da compra. É com ele que liberamos o seu acesso.
+      </p>
+      <button onclick="document.getElementById('avisoEmail').style.display='none'" style="
+        background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;
+        font-size:1rem;padding:0;line-height:1;flex-shrink:0;margin-top:1px;
+      " aria-label="Fechar aviso">✕</button>
+    </div>
+
+    <form id="loginForm" autocomplete="off">
+      <label for="email" class="field-label">Seu e-mail</label>
+      <input
+        type="email"
+        id="email"
+        class="field-input"
+        placeholder="seuemail@exemplo.com"
+        required
+        inputmode="email"
+      >
+
+      <!-- Mensagem de erro -->
+      <div id="erroMsg" style="display:none;margin-top:14px;background:rgba(220,53,69,.15);border:1px solid rgba(220,53,69,.40);border-radius:10px;padding:12px 14px;font-size:.88rem;color:#ff8a8a;text-align:left"></div>
+
+      <button type="submit" class="btn-enter" id="btnEntrar" style="margin-top:18px">
+        <i class="fas fa-dove me-2"></i>Acessar Minha Novena
+      </button>
+    </form>
+
+    <p class="quote">
+      "Ela desfaz os nós que aprisionam<br>nossa alma e nosso coração."
+    </p>
+
+    <p class="footer-copy">© 2025 · Novena de Nossa Senhora Desatadora de Nós</p>
+
+  </div>
+
+  <script>
+    // Estrelas
+    const stars = document.getElementById('stars');
+    for (let i = 0; i < 50; i++) {
+      const el = document.createElement('div');
+      el.className = 's';
+      const size = Math.random() < 0.3 ? 3 : 2;
+      el.style.cssText = `
+        width:${size}px; height:${size}px;
+        left:${Math.random()*100}%;
+        top:${Math.random()*70}%;
+        --d:${(2+Math.random()*3).toFixed(1)}s;
+        --dl:${(Math.random()*5).toFixed(1)}s;
+      `;
+      stars.appendChild(el);
+    }
+
+    // Handle visível só no mobile
+    if (window.innerWidth < 540) {
+      document.getElementById('handle').style.display = 'block';
+    }
+
+    // Admin toggle
+    function toggleAdmin() {
+      const g = document.getElementById('senhaGroup');
+      g.style.display = g.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Submit
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const email  = document.getElementById('email').value.trim();
+      const btn    = document.getElementById('btnEntrar');
+      const erro   = document.getElementById('erroMsg');
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Verificando...';
+      erro.style.display = 'none';
+
+      try {
+        const res  = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.token) {
+          localStorage.setItem('conexao_token', data.token);
+          window.location.href = data.redirect || '/inicio-oracoes-principal/';
+        } else {
+          erro.textContent = data.erro || 'Erro ao fazer login. Tente novamente.';
+          erro.style.display = 'block';
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-dove me-2"></i>Acessar Minha Novena';
+        }
+      } catch (err) {
+        erro.textContent = 'Erro de conexão. Verifique sua internet e tente novamente.';
+        erro.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-dove me-2"></i>Acessar Minha Novena';
+      }
+    });
+  </script>
+</body>
+</html>

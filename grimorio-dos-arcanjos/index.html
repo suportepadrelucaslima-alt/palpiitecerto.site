@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="pt"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Grimório dos Arcanjos — Livro Sagrado</title>
+  <link rel="stylesheet" href="../inicio-oracoes-principal/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../inicio-oracoes-principal/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body,html{margin:0;padding:0;font-family:'Lato',sans-serif;background:linear-gradient(160deg,#0d1f50 0%,#0a1640 50%,#0e1e4a 100%);background-attachment:fixed;color:white;min-height:100vh;font-size:17px}
+    .title-font{font-family:'Cinzel',serif}.golden-text{color:#d4af37}
+    .overlay-pattern{background-image:url('https://www.transparenttextures.com/patterns/crosses.png');opacity:.06;position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
+    .site-header{padding:12px 0;background:rgba(8,18,55,.97);border-bottom:2px solid rgba(212,175,55,.45);position:sticky;top:0;z-index:100}
+    .back-link{color:#d4af37;text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-weight:bold;font-size:17px}.back-link:hover{color:#fff}
+    .section-divider{display:flex;align-items:center;margin:28px 0}
+    .divider-line{flex-grow:1;height:2px;background:linear-gradient(to right,transparent,rgba(212,175,55,.65),transparent)}
+    .divider-icon{font-size:22px;color:#d4af37;margin:0 16px}
+    /* ARCANJO SECTIONS */
+    .arcanjo-section{background:rgba(8,18,50,.88);border-radius:18px;padding:30px 24px;margin-bottom:32px;position:relative;overflow:hidden}
+    .arcanjo-section::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;border-radius:18px 0 0 18px}
+    .sec-miguel::before{background:linear-gradient(180deg,#ff6b35,#d4af37)}
+    .sec-rafael::before{background:linear-gradient(180deg,#35c785,#1a7a50)}
+    .sec-gabriel::before{background:linear-gradient(180deg,#5b9fff,#1a4a9a)}
+    .sec-uriel::before{background:linear-gradient(180deg,#d4af37,#8B6914)}
+    .arcanjo-sec-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.10)}
+    .arcanjo-sec-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+    .sec-miguel .arcanjo-sec-icon{background:rgba(255,107,53,.15);border:2px solid rgba(255,107,53,.55);color:#ff9b65}
+    .sec-rafael .arcanjo-sec-icon{background:rgba(53,199,133,.15);border:2px solid rgba(53,199,133,.55);color:#5fd9a3}
+    .sec-gabriel .arcanjo-sec-icon{background:rgba(91,159,255,.15);border:2px solid rgba(91,159,255,.55);color:#8bbfff}
+    .sec-uriel .arcanjo-sec-icon{background:rgba(212,175,55,.15);border:2px solid rgba(212,175,55,.55);color:#d4af37}
+    .arcanjo-sec-name{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;margin:0 0 4px}
+    .arcanjo-sec-subtitle{font-size:.88rem;opacity:.60;margin:0}
+    .correspondence-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:16px 0 20px}
+    .corr-item{background:rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;text-align:center}
+    .corr-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;opacity:.50;font-weight:bold;margin-bottom:4px}
+    .corr-value{font-size:.88rem;font-weight:600;opacity:.90}
+    .sec-miguel .corr-value{color:#ff9b65}
+    .sec-rafael .corr-value{color:#5fd9a3}
+    .sec-gabriel .corr-value{color:#8bbfff}
+    .sec-uriel .corr-value{color:#d4af37}
+    .grimoire-subtitle{font-family:'Cinzel',serif;font-size:.88rem;text-transform:uppercase;letter-spacing:2px;opacity:.60;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+    .grimoire-text{font-family:'Lato',sans-serif;font-style:normal;line-height:1.85;font-size:1.08rem;color:rgba(255,255,255,.92)}
+    .grimoire-text p{margin-bottom:12px}.grimoire-text p:last-child{margin-bottom:0}
+    .invocation-box{background:rgba(0,0,0,.30);border-radius:12px;padding:18px 20px;border-left:3px solid rgba(212,175,55,.40);margin:16px 0}
+    .ritual-steps{padding-left:0;list-style:none;margin:0}
+    .ritual-steps li{padding:8px 0 8px 28px;position:relative;font-size:.93rem;color:rgba(255,255,255,.80);border-bottom:1px solid rgba(255,255,255,.06)}
+    .ritual-steps li:last-child{border-bottom:none}
+    .ritual-steps li::before{content:counter(step);counter-increment:step;position:absolute;left:0;width:20px;height:20px;background:rgba(212,175,55,.20);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.70rem;font-weight:bold;color:#d4af37;text-align:center;line-height:20px}
+    .ritual-steps{counter-reset:step}
+    /* PDF DOWNLOAD */
+    .download-banner{background:linear-gradient(135deg,rgba(212,175,55,.12),rgba(8,18,50,.95));border:2px solid rgba(212,175,55,.60);border-radius:18px;padding:30px 24px;text-align:center;margin-top:10px}
+    .btn-download{background:linear-gradient(135deg,#b8870b,#f7de6a,#b8870b);background-size:200% auto;color:#06103a;border:none;font-weight:bold;padding:14px 32px;border-radius:30px;font-size:1rem;font-family:'Cinzel',serif;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:all .3s;animation:pulse 3s infinite}
+    @keyframes pulse{0%,100%{box-shadow:0 4px 16px rgba(212,175,55,.5)}50%{box-shadow:0 6px 28px rgba(212,175,55,.8)}}
+    .btn-download:hover{background-position:right center}
+    /* WALL */
+    .premium-wall{background:rgba(8,18,50,.95);border:2px solid rgba(212,175,55,.55);border-radius:18px;padding:36px 24px;text-align:center;max-width:500px;margin:60px auto}
+    .wall-icon{font-size:52px;color:#d4af37;margin-bottom:16px;opacity:.80}
+    .wall-title{font-family:'Cinzel',serif;color:#d4af37;font-size:1.3rem;margin-bottom:10px}
+    .wall-text{color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.65;margin-bottom:24px}
+    .btn-comprar{background:linear-gradient(135deg,#b8870b,#f7de6a,#b8870b);background-size:200% auto;color:#06103a;border:none;font-weight:bold;padding:14px 28px;border-radius:30px;font-size:1rem;font-family:'Cinzel',serif;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;animation:pulse 3s infinite}
+    .btn-comprar:hover{background-position:right center;color:#06103a}
+    .btn-ja-comprei{border:1px solid rgba(212,175,55,.45);color:rgba(212,175,55,.80);background:none;padding:10px 22px;border-radius:25px;font-size:.88rem;text-decoration:none;display:inline-block;margin-top:12px;transition:all .3s}
+    .btn-ja-comprei:hover{background:rgba(212,175,55,.12);color:#d4af37}
+    .site-footer{background:rgba(8,18,55,.97);border-top:2px solid rgba(212,175,55,.45);padding:20px 0;margin-top:48px;text-align:center;font-size:14px;color:rgba(255,255,255,.45)}
+    @media(max-width:575px){.arcanjo-section{padding:20px 14px}.correspondence-grid{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+<div class="overlay-pattern"></div>
+<header class="site-header">
+  <div class="container"><a href="../produto-premium/" class="back-link"><i class="fas fa-arrow-left"></i> Biblioteca Sagrada</a></div>
+</header>
+
+<!-- WALL (não comprou) -->
+<div id="premium-wall">
+  <div class="premium-wall">
+    <div class="wall-icon"><i class="fas fa-book-open"></i></div>
+    <h2 class="wall-title">Grimório dos Arcanjos</h2>
+    <p class="wall-text">Este conteúdo é exclusivo para membros. Adquira o acesso ao livro sagrado dos arcanjos — com correspondências, invocações, rituais devocionais e oração de cada arcanjo. Disponível para download em PDF.</p>
+    <a href="https://pay.kiwify.com.br/aJNqyG8" class="btn-comprar"><i class="fas fa-lock-open"></i> Quero Ter Acesso</a><br>
+    <a href="../login/" class="btn-ja-comprei">Já comprei — Entrar</a>
+  </div>
+</div>
+
+<!-- CONTEÚDO (comprou) -->
+<div id="conteudo-premium" style="display:none">
+<main class="py-4">
+<div class="container" style="max-width:820px">
+
+  <div class="text-center mb-4" id="grimoire-header">
+    <p style="color:rgba(212,175,55,.65);letter-spacing:4px;font-size:.72rem;font-family:'Cinzel',serif;">— ✦ LIVRO SAGRADO ✦ —</p>
+    <h1 class="title-font golden-text" style="font-size:2rem">Grimório dos Arcanjos</h1>
+    <p style="color:rgba(255,255,255,.55);font-family:'IM Fell English',serif;font-style:italic;font-size:.95rem">Bem-vindo, <span id="email-logado"></span></p>
+    <p style="color:rgba(255,255,255,.45);font-size:.88rem;margin-top:8px;max-width:600px;margin-left:auto;margin-right:auto">O guia completo dos quatro arcanjos principais — suas cores sagradas, símbolos, dias, elementos, invocações e rituais devocionais. Conhecimento para aprofundar sua vida espiritual.</p>
+  </div>
+
+  <div class="section-divider"><div class="divider-line"></div><div class="divider-icon"><i class="fas fa-book-open"></i></div><div class="divider-line"></div></div>
+
+  <!-- ═══════════ SÃO MIGUEL ═══════════ -->
+  <div class="arcanjo-section sec-miguel">
+    <div class="arcanjo-sec-header">
+      <div class="arcanjo-sec-icon"><i class="fas fa-shield-halved"></i></div>
+      <div>
+        <h2 class="arcanjo-sec-name" style="color:#ff9b65">São Miguel Arcanjo</h2>
+        <p class="arcanjo-sec-subtitle">Príncipe das Milícias Celestiais · Quis ut Deus</p>
+      </div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-table-cells"></i> Correspondências Sagradas</div>
+    <div class="correspondence-grid">
+      <div class="corr-item"><div class="corr-label">Cor</div><div class="corr-value">Vermelho e Dourado</div></div>
+      <div class="corr-item"><div class="corr-label">Dia</div><div class="corr-value">Domingo</div></div>
+      <div class="corr-item"><div class="corr-label">Elemento</div><div class="corr-value">Fogo</div></div>
+      <div class="corr-item"><div class="corr-label">Hora</div><div class="corr-value">Manhã</div></div>
+      <div class="corr-item"><div class="corr-label">Missão</div><div class="corr-value">Proteção e Batalha</div></div>
+      <div class="corr-item"><div class="corr-label">Símbolo</div><div class="corr-value">Espada e Escudo</div></div>
+      <div class="corr-item"><div class="corr-label">Pedra</div><div class="corr-value">Rubi e Granada</div></div>
+      <div class="corr-item"><div class="corr-label">Incenso</div><div class="corr-value">Olíbano</div></div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-scroll"></i> Sobre São Miguel</div>
+    <div class="grimoire-text">
+      <p>São Miguel é o mais poderoso dos arcanjos, mencionado no livro de Daniel, na Epístola de Judas e no Apocalipse. Seu nome significa "Quem é como Deus?" — o grito de guerra que lançou diante da rebelião de Lúcifer. Ele é o protetor de Israel, da Igreja Católica e de todas as almas que se colocam sob sua proteção.</p>
+      <p>É representado com armadura, espada flamejante e escudo, pisando sobre o dragão ou Satanás. Sua presença traz força, coragem e clareza espiritual. É invocado em batalhas espirituais, para proteção pessoal, proteção do lar e afastamento do mal.</p>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-star"></i> Invocação</div>
+    <div class="invocation-box">
+      <div class="grimoire-text">
+        <p><em>"Miguel, Príncipe Celestial, Guerreiro do Trono de Deus — eu te invoco agora. Vem com tua espada de luz, vem com teu escudo de fé. Que nenhuma força das trevas possa se aproximar de mim, da minha família e do meu lar. Quis ut Deus! Que somente o que é de Deus permaneça em minha vida. Amém."</em></p>
+      </div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-fire-flame-curved"></i> Ritual Devocional</div>
+    <ol class="ritual-steps">
+      <li>Acenda uma vela vermelha ou dourada em um local tranquilo</li>
+      <li>Faça o sinal da cruz e permaneça em silêncio por alguns momentos</li>
+      <li>Declare em voz alta: "Eu me coloco sob a proteção de São Miguel Arcanjo"</li>
+      <li>Recite a invocação acima com fé e convicção</li>
+      <li>Visualize uma armadura de luz cobrindo seu corpo do topo da cabeça aos pés</li>
+      <li>Peça proteção para sua família, seu lar e sua vida espiritual</li>
+      <li>Finalize com um Pai-Nosso e uma Ave-Maria em ação de graças</li>
+    </ol>
+  </div>
+
+  <!-- ═══════════ SÃO RAFAEL ═══════════ -->
+  <div class="arcanjo-section sec-rafael">
+    <div class="arcanjo-sec-header">
+      <div class="arcanjo-sec-icon"><i class="fas fa-staff-snake"></i></div>
+      <div>
+        <h2 class="arcanjo-sec-name" style="color:#5fd9a3">São Rafael Arcanjo</h2>
+        <p class="arcanjo-sec-subtitle">Médico de Deus · Deus Cura</p>
+      </div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-table-cells"></i> Correspondências Sagradas</div>
+    <div class="correspondence-grid">
+      <div class="corr-item"><div class="corr-label">Cor</div><div class="corr-value">Verde Esmeralda</div></div>
+      <div class="corr-item"><div class="corr-label">Dia</div><div class="corr-value">Quarta-feira</div></div>
+      <div class="corr-item"><div class="corr-label">Elemento</div><div class="corr-value">Água</div></div>
+      <div class="corr-item"><div class="corr-label">Hora</div><div class="corr-value">Amanhecer</div></div>
+      <div class="corr-item"><div class="corr-label">Missão</div><div class="corr-value">Cura e Viagens</div></div>
+      <div class="corr-item"><div class="corr-label">Símbolo</div><div class="corr-value">Cajado e Peixe</div></div>
+      <div class="corr-item"><div class="corr-label">Pedra</div><div class="corr-value">Esmeralda e Malaquita</div></div>
+      <div class="corr-item"><div class="corr-label">Incenso</div><div class="corr-value">Sândalo</div></div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-scroll"></i> Sobre São Rafael</div>
+    <div class="grimoire-text">
+      <p>São Rafael é o arcanjo da cura, mencionado extensamente no Livro de Tobias, onde acompanhou o jovem Tobias em sua jornada e curou a cegueira de seu pai com fel de peixe. Seu nome significa "Deus cura" — e sua missão é a cura do corpo, da alma e do espírito.</p>
+      <p>É patrono dos médicos, enfermeiros, viajantes, jovens e dos que buscam amor verdadeiro. É invocado nos momentos de enfermidade física, cura interior de traumas e feridas emocionais, proteção em viagens e para encontrar um parceiro de vida abençoado por Deus.</p>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-star"></i> Invocação</div>
+    <div class="invocation-box">
+      <div class="grimoire-text">
+        <p><em>"Rafael, Médico de Deus, que curaste os olhos de Tobit e acompanhaste Tobias em segurança — vem a mim agora. Toca com tuas mãos sagradas cada parte de mim que precisa de cura: o corpo, a mente, o coração. Que tua presença seja como bálsamo e tua luz seja como medicina. Amém."</em></p>
+      </div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-fire-flame-curved"></i> Ritual Devocional</div>
+    <ol class="ritual-steps">
+      <li>Escolha um momento de tranquilidade, de preferência pela manhã</li>
+      <li>Acenda uma vela verde e coloque um copo de água limpa ao lado</li>
+      <li>Coloque as mãos sobre a parte do corpo que precisa de cura (ou sobre o coração)</li>
+      <li>Recite a invocação acima com profunda fé</li>
+      <li>Permaneça em silêncio por alguns minutos, imaginando uma luz verde curadora preenchendo seu ser</li>
+      <li>Beba a água ao final como sinal de recepção da graça</li>
+      <li>Finalize agradecendo a Deus pela cura que está em processo</li>
+    </ol>
+  </div>
+
+  <!-- ═══════════ SÃO GABRIEL ═══════════ -->
+  <div class="arcanjo-section sec-gabriel">
+    <div class="arcanjo-sec-header">
+      <div class="arcanjo-sec-icon"><i class="fas fa-bell"></i></div>
+      <div>
+        <h2 class="arcanjo-sec-name" style="color:#8bbfff">São Gabriel Arcanjo</h2>
+        <p class="arcanjo-sec-subtitle">Mensageiro de Deus · Força de Deus</p>
+      </div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-table-cells"></i> Correspondências Sagradas</div>
+    <div class="correspondence-grid">
+      <div class="corr-item"><div class="corr-label">Cor</div><div class="corr-value">Azul e Branco</div></div>
+      <div class="corr-item"><div class="corr-label">Dia</div><div class="corr-value">Segunda-feira</div></div>
+      <div class="corr-item"><div class="corr-label">Elemento</div><div class="corr-value">Ar</div></div>
+      <div class="corr-item"><div class="corr-label">Hora</div><div class="corr-value">Entardecer</div></div>
+      <div class="corr-item"><div class="corr-label">Missão</div><div class="corr-value">Revelação e Anunciação</div></div>
+      <div class="corr-item"><div class="corr-label">Símbolo</div><div class="corr-value">Trombeta e Lírio</div></div>
+      <div class="corr-item"><div class="corr-label">Pedra</div><div class="corr-value">Safira e Quartzo Azul</div></div>
+      <div class="corr-item"><div class="corr-label">Incenso</div><div class="corr-value">Jasmim e Eucalipto</div></div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-scroll"></i> Sobre São Gabriel</div>
+    <div class="grimoire-text">
+      <p>São Gabriel é o mensageiro supremo de Deus, enviado em momentos de revelação e mudança histórica. Foi ele quem anunciou a Daniel os grandes eventos futuros, quem deu a Zacarias a notícia do nascimento de João Batista e quem se prostrou diante de Maria com as palavras imortais: "Não temas, Maria..."</p>
+      <p>Seu nome significa "Força de Deus" ou "Herói de Deus". É invocado para obter clareza em decisões, revelação da vontade de Deus, comunicação abençoada, discernimento espiritual e para receber mensagens e chamados divinos. É protetor especial das comunicações e das mensagens.</p>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-star"></i> Invocação</div>
+    <div class="invocation-box">
+      <div class="grimoire-text">
+        <p><em>"Gabriel, Mensageiro do Altíssimo, porta-voz do Céu — fala ao meu coração aquilo que Deus quer me dizer. Abre meus ouvidos espirituais para que eu ouça a voz do Senhor com clareza. Que tua trombeta ressoe dentro de mim e desperte o que dormia. Não temas, diz também a mim. Amém."</em></p>
+      </div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-fire-flame-curved"></i> Ritual Devocional</div>
+    <ol class="ritual-steps">
+      <li>Sente-se em silêncio e feche os olhos por alguns momentos</li>
+      <li>Acenda uma vela azul ou branca</li>
+      <li>Abra o coração perguntando: "Senhor, o que queres me dizer?"</li>
+      <li>Recite a invocação com total abertura e disponibilidade</li>
+      <li>Permaneça em silêncio profundo por pelo menos 10 minutos, ouvindo o coração</li>
+      <li>Escreva em um papel qualquer pensamento, impressão ou palavra que vier</li>
+      <li>Agradeça e ofereça o que recebeu de volta a Deus em oração</li>
+    </ol>
+  </div>
+
+  <!-- ═══════════ URIEL ═══════════ -->
+  <div class="arcanjo-section sec-uriel">
+    <div class="arcanjo-sec-header">
+      <div class="arcanjo-sec-icon"><i class="fas fa-fire-flame-curved"></i></div>
+      <div>
+        <h2 class="arcanjo-sec-name" style="color:#d4af37">Uriel Arcanjo</h2>
+        <p class="arcanjo-sec-subtitle">Luz de Deus · Fogo Sagrado da Sabedoria</p>
+      </div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-table-cells"></i> Correspondências Sagradas</div>
+    <div class="correspondence-grid">
+      <div class="corr-item"><div class="corr-label">Cor</div><div class="corr-value">Dourado e Rubi</div></div>
+      <div class="corr-item"><div class="corr-label">Dia</div><div class="corr-value">Quinta-feira</div></div>
+      <div class="corr-item"><div class="corr-label">Elemento</div><div class="corr-value">Terra e Fogo</div></div>
+      <div class="corr-item"><div class="corr-label">Hora</div><div class="corr-value">Meio-dia</div></div>
+      <div class="corr-item"><div class="corr-label">Missão</div><div class="corr-value">Sabedoria e Clareza</div></div>
+      <div class="corr-item"><div class="corr-label">Símbolo</div><div class="corr-value">Chama e Livro</div></div>
+      <div class="corr-item"><div class="corr-label">Pedra</div><div class="corr-value">Âmbar e Citrino</div></div>
+      <div class="corr-item"><div class="corr-label">Incenso</div><div class="corr-value">Mirra e Cedro</div></div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-scroll"></i> Sobre Uriel</div>
+    <div class="grimoire-text">
+      <p>Uriel é mencionado em textos apócrifos como o Livro de Enoque, onde aparece como o arcanjo que guarda o portão do paraíso com a espada flamejante. Seu nome significa "Luz de Deus" — e sua missão é iluminar a mente humana com a sabedoria divina, purificar o coração com o fogo sagrado e guiar as almas para o entendimento das verdades espirituais.</p>
+      <p>É invocado para obter sabedoria nas decisões difíceis, clareza mental, purificação interior, discernimento entre o bem e o mal, estudo e aprendizado espiritual. Ele é o arcanjo do conhecimento sagrado e da transformação pelo fogo.</p>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-star"></i> Invocação</div>
+    <div class="invocation-box">
+      <div class="grimoire-text">
+        <p><em>"Uriel, Luz de Deus, guardião do fogo sagrado — ilumina minha mente com a sabedoria que vem do Alto. Queima em mim tudo que não é de Deus: o orgulho, a confusão, o medo, a impureza de pensamento. Que tua luz me mostre o caminho certo quando tudo parece escuro. Fogo de Deus, purifica-me. Amém."</em></p>
+      </div>
+    </div>
+
+    <div class="grimoire-subtitle"><i class="fas fa-fire-flame-curved"></i> Ritual Devocional</div>
+    <ol class="ritual-steps">
+      <li>Acenda uma vela dourada ou amarela em um local limpo e organizado</li>
+      <li>Escreva em um papel uma área da vida onde precisa de sabedoria ou clareza</li>
+      <li>Segure o papel na mão e recite a invocação com sinceridade</li>
+      <li>Contemple a chama da vela por alguns minutos, deixando os pensamentos se aquietarem</li>
+      <li>Queime o papel na chama da vela como símbolo de entrega dessa situação a Deus</li>
+      <li>Permaneça em oração silenciosa pedindo sabedoria e discernimento</li>
+      <li>Finalize com uma promessa de agir conforme a sabedoria que Deus te der</li>
+    </ol>
+  </div>
+
+  <!-- ═══════════ INVOCAÇÃO UNIFICADA ═══════════ -->
+  <div style="background:linear-gradient(135deg,rgba(212,175,55,.12),rgba(8,18,50,.95));border:2px solid rgba(212,175,55,.60);border-radius:18px;padding:30px 24px;margin-bottom:32px">
+    <div class="text-center mb-4">
+      <p style="color:rgba(212,175,55,.65);letter-spacing:3px;font-size:.72rem;font-family:'Cinzel',serif;">— ✦ INVOCAÇÃO SUPREMA ✦ —</p>
+      <h2 class="title-font golden-text">O Círculo dos Quatro Arcanjos</h2>
+      <p style="color:rgba(255,255,255,.50);font-size:.88rem">Para invocar a proteção completa dos quatro pontos cardeais</p>
+    </div>
+    <div class="grimoire-text text-white">
+      <p>Posicione-se de pé, de frente para o leste. Visualize os quatro arcanjos nos quatro pontos ao redor de você:</p>
+      <p><strong style="color:#ff9b65">À frente (Leste) — São Miguel:</strong> com sua espada de fogo e escudo de cristal, protegendo sua mente e sua fronte.</p>
+      <p><strong style="color:#5fd9a3">Atrás (Oeste) — São Rafael:</strong> com seu cajado curador e a luz verde esmeralda, curando o que ficou para trás em sua vida.</p>
+      <p><strong style="color:#8bbfff">À sua direita (Norte) — São Gabriel:</strong> com sua trombeta de revelação, anunciando os propósitos de Deus para sua vida.</p>
+      <p><strong style="color:#d4af37">À sua esquerda (Sul) — Uriel:</strong> com sua chama dourada, iluminando o caminho à frente e purificando o interior.</p>
+      <p>Declare: <em>"Que os quatro arcanjos do Trono de Deus me cerquem agora. Miguel, protege-me. Rafael, cura-me. Gabriel, guia-me. Uriel, ilumina-me. Que somente o que é de Deus permaneça em minha vida. Amém."</em></p>
+    </div>
+  </div>
+
+
+</div>
+</main>
+</div>
+
+<footer class="site-footer"><p class="mb-0">© 2025 · Grimório dos Arcanjos · Conexão Prosperidade</p></footer>
+
+<script src="../js/auth.js"></script>
+<script>
+protegerPagina('grimorio-dos-arcanjos');
+</script>
+</body></html>
