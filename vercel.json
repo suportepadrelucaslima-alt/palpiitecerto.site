@@ -1,5 +1,8 @@
 {
   "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/api/webhook/", "destination": "/api/webhook" }
+  ],
   "headers": [
     {
       "source": "/api/(.*)",
