@@ -42,7 +42,7 @@ async function enviarEmailAcesso(email, nomeCliente, produtoId) {
       <p style="font-size:16px;line-height:1.6;">Seu acesso ao <strong style="color:#d4af37;">${nomeProduto}</strong> foi liberado com sucesso.</p>
       <p style="font-size:16px;line-height:1.6;">Para acessar, clique no botão abaixo e entre com o seu e-mail de compra:</p>
       <div style="text-align:center;margin:30px 0;">
-        <a href="https://palpiitecerto.site/login/" style="background:#d4af37;color:#0a0a2e;padding:15px 35px;border-radius:8px;text-decoration:none;font-size:18px;font-weight:bold;">
+        <a href="https://jornadaplenitudeverdadeiradesperta.site/login/" style="background:#d4af37;color:#0a0a2e;padding:15px 35px;border-radius:8px;text-decoration:none;font-size:18px;font-weight:bold;">
           Acessar agora →
         </a>
       </div>
