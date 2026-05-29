@@ -105,9 +105,6 @@ module.exports = async (req, res) => {
 
   const body = req.body || {};
 
-  // Log completo para identificar estrutura do payload Kiwify
-  console.log('PAYLOAD_KIWIFY:', JSON.stringify(body));
-
   // Kiwify: registra só quando pagamento foi aprovado
   const orderStatus = body?.order_status || '';
   const eventType = body?.webhook_event_type || '';
