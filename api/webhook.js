@@ -108,20 +108,23 @@ module.exports = async (req, res) => {
   // Log completo para identificar estrutura do payload Kiwify
   console.log('PAYLOAD_KIWIFY:', JSON.stringify(body));
 
-  // Kiwify: order_status = "paid" ou type = "order_approved"
-  const status = body?.order_status || body?.status || body?.type || '';
-  if (status && !['paid', 'order_approved', 'approved', 'APPROVED', 'complete', 'completed'].includes(status)) {
-    return res.status(200).json({ ok: true, ignorado: true });
+  // Kiwify: registra só quando pagamento foi aprovado
+  const orderStatus = body?.order_status || '';
+  const eventType = body?.webhook_event_type || '';
+  const pago = orderStatus === 'paid' || eventType === 'order_approved';
+  if (!pago) {
+    return res.status(200).json({ ok: true, ignorado: true, orderStatus, eventType });
   }
 
   const email =
-    body?.customer?.email ||
     body?.Customer?.email ||
+    body?.customer?.email ||
     body?.email ||
     null;
 
-  const kiwifyProductId = body?.product?.id || body?.Product?.id || null;
-  const kiwifyProductName = body?.product?.name || body?.Product?.name || null;
+  // Kiwify usa "Product" com P maiúsculo e "product_id"
+  const kiwifyProductId = body?.Product?.product_id || body?.product?.id || null;
+  const kiwifyProductName = body?.Product?.product_name || body?.product?.name || null;
 
   if (!email) {
     console.error('Webhook sem email. Payload:', JSON.stringify(body));
@@ -134,7 +137,7 @@ module.exports = async (req, res) => {
   }
 
   const emailNorm = email.toLowerCase().trim();
-  const nomeCliente = body?.customer?.name || body?.Customer?.name || '';
+  const nomeCliente = body?.Customer?.full_name || body?.customer?.name || '';
 
   let produtoId = kiwifyProductId ? PRODUTO_MAP[kiwifyProductId] : null;
   if (!produtoId && kiwifyProductName) produtoId = mapearPorNome(kiwifyProductName);
