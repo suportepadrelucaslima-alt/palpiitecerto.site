@@ -105,6 +105,9 @@ module.exports = async (req, res) => {
 
   const body = req.body || {};
 
+  // Log completo para identificar estrutura do payload Kiwify
+  console.log('PAYLOAD_KIWIFY:', JSON.stringify(body));
+
   // Kiwify: order_status = "paid" ou type = "order_approved"
   const status = body?.order_status || body?.status || body?.type || '';
   if (status && !['paid', 'order_approved', 'approved', 'APPROVED', 'complete', 'completed'].includes(status)) {
